@@ -17,9 +17,12 @@
 //       '### '
 //       '####'
 
+//You can solve this by recursion also
 function steps(n) {
     let toPrint;
     for(let i = 1;i<=n; i ++){
+      //you can just use string 
+      //By string concatenation also you can reduce the space complexity of this problem
         toPrint = new Array(n);
         for(let j=1;j<=n;j++){
           if(j<=i){
