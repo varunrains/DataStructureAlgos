@@ -33,6 +33,7 @@ var evalRPN = function (tokens) {
 };
 
 /*
+This problem is also called postpix
 Source: https://leetcode.com/problems/evaluate-reverse-polish-notation/
 Input: tokens = ["2","1","+","3","*"]
 Output: 9
