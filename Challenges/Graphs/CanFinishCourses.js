@@ -5,8 +5,8 @@
  */
 var canFinish = function (numCourses, prerequisites) {
   const graph = buildGraph(numCourses,prerequisites);
-  const visited = new Array(numCourses - 1).fill(false);
-  const recursionVisited = new Array(numCourses - 1).fill(false);
+  const visited = new Array(numCourses).fill(false);
+  const recursionVisited = new Array(numCourses).fill(false);
 
   for (let i = 0; i < numCourses; i++) {
     if (!visited[i] && checkCycle(graph, i, visited, recursionVisited)) {
