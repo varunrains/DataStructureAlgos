@@ -41,49 +41,84 @@ namespace ArraysDSA
             return result;
         }
 
-        public static int CountUniqueSubarrays(List<int> A)
+        public static int BestTimeToBuyStock(List<int> A)
         {
-            var result = new List<List<int>>();
-            int count = result.Count;
-            for (int start = 0; start < A.Count; start++)
-            {
-                for (int end = start; end < A.Count; end++)
-                {
-                    var subArray = new List<int>();
+            int l_minIndex = 0;
+            int l_maxIndex = A.Count -1;
+            if(A.Count <= 0) { return 0; }
+            int maximumNumber = int.MinValue;
+            int minimumNumber = int.MaxValue;
 
-                    for (int printer = start; printer <= end; printer++)
-                    {
-                        subArray.Add(A[printer]);
-                    }
-                    result.Add(subArray);
+            for(int i=0;i<A.Count;i++)
+            {
+               
+                if (A[i] < minimumNumber)
+                {
+                    
+                    minimumNumber = A[i];
+                    l_minIndex = i;
                 }
-            }
-            Dictionary<string, int> counterMap = new Dictionary<string, int>();
-            for (int i= 0; i < result.Count; i++)
-            {
-
-                for (int j = 0; j < result[i].Count; j++)
+                if (A[i] > maximumNumber)
                 {
-                    if (!counterMap.ContainsKey(result[i][j].ToString()))
-                    {
-                        counterMap.Add(result[i][j].ToString(), 1);
-                    }
-                    else
-                    {
-                        counterMap[result[i][j].ToString()]++;
-                        break;
-                    }    
-                   if(j== result[i].Count - 1)
-                    {
-                        count++;
-                    }
+                    
+                    maximumNumber = A[i];
+                    l_maxIndex = i;
                     
                 }
-
-                counterMap.Clear();
-                
             }
-            return count;
+            if (l_minIndex >= l_maxIndex) return 0;
+            return maximumNumber - minimumNumber;
+        }
+
+        public static int CountUniqueSubarrays(List<int> A)
+        {
+            int left = 0, right = 0;
+            int ans = 0;
+            Dictionary<string, int> hashMap = new Dictionary<string, int>();
+            for(int i=0;i<A.Count;i++)
+            {
+                if (hashMap.ContainsKey(A[i].ToString()))
+                {
+                    hashMap[A[i].ToString()]++;
+                }
+                else
+                {
+                    hashMap.Add(A[i].ToString(), 1);
+                }
+                ans += right - left + 1;
+                right++;
+            }
+
+            return ans;
+          
+
+            //Dictionary<string, int> counterMap = new Dictionary<string, int>();
+            //for (int i= 0; i < result.Count; i++)
+            //{
+
+            //    for (int j = 0; j < result[i].Count; j++)
+            //    {
+            //        if (!counterMap.ContainsKey(result[i][j].ToString()))
+            //        {
+            //            counterMap.Add(result[i][j].ToString(), 1);
+            //        }
+            //        else
+            //        {
+            //            counterMap[result[i][j].ToString()]++;
+            //            break;
+            //        }    
+            //       if(j== result[i].Count - 1)
+            //        {
+            //            count++;
+            //        }
+                    
+            //    }
+
+            //    counterMap.Clear();
+                
+            //}
+            //Since the number of subarrays could be large, return value % 109 +7.
+            //return result.Count % 1000000007;
         }
 
         public static int CountingSubArrays(List<int> A, int B)
@@ -156,6 +191,56 @@ namespace ArraysDSA
             return 0;
         }
 
+
+        public static int ClosestMinMax(List<int> A)
+        {
+            int maxElement = int.MinValue;
+            int minElement = int.MaxValue;
+
+            for(int i=0;i<A.Count;i++)
+            {
+                if (A[i] < minElement)
+                {
+                    minElement = A[i];
+                }
+                if (A[i] > maxElement)
+                {
+                    maxElement = A[i];
+                }
+            }
+
+            //Minimum and maximum index will be always at the edge in a subarray
+            //Go over an array and store the min and max index/ max and min index
+            //whichever comes first and then calculate the length of the subarray
+            //by formula R-L+1 to get the length
+            
+            int l_min = -1;
+            int l_max = -1;
+            int ans = int.MaxValue; //Minimum length of subarray
+            for(int i = 0; i < A.Count; i++)
+            {
+                if (A[i] == minElement)
+                {
+                    l_min = i;
+                    if (l_max != -1)
+                    {
+                        ans = Math.Min(ans, l_min - l_max + 1);
+                    }
+
+                }
+
+                if (A[i] == maxElement)
+                {
+                    l_max  = i;
+                    if(l_min != -1)
+                    {
+                        ans = Math.Min(ans, l_max - l_min + 1);
+                    }
+                }
+            }
+
+            return ans;
+        }
     }
 }
 
