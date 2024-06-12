@@ -191,6 +191,32 @@ namespace ArraysDSA
             return 0;
         }
 
+        //https://www.scaler.com/academy/mentee-dashboard/class/223211/homework/problems/12827?navref=cl_tt_lst_sl
+        public static int SubarrayWithLeastAverage(List<int> A, int B)
+        {
+            int minSum = 0;
+            int sum = 0;
+            int returnMinIndex = 0;
+            for (int l = 0; l < B; l++)
+            {
+                sum += A[l];
+            }
+            minSum = sum;
+
+            for (int r = B; r < A.Count; r++) {
+                int l = r - B;
+                sum += A[r] - A[l];
+                var result = Math.Min(minSum, sum);
+                if(result != minSum)
+                {
+                    minSum = result;
+                    //As the left index will be one behind
+                    returnMinIndex = l+1;
+                }
+            }
+
+            return returnMinIndex;
+        }
 
         public static int ClosestMinMax(List<int> A)
         {

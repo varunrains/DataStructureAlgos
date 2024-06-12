@@ -77,6 +77,20 @@ namespace ArraysDSA
                     }
                 }
             }
+
+            for(int row = 0; row < a.Count; row++)
+            {
+                int i = 0;
+                int j = a.Count - 1;
+                while(i < j)
+                {
+                    var temp = a[row][i];
+                    a[row][i] = a[row][j];
+                    a[row][j] = temp;
+                    i++;
+                    j--;
+                }
+            }
         }
 
             public static List<List<int>> PrintAntiDiagonals(List<List<int>> A)
@@ -109,5 +123,55 @@ namespace ArraysDSA
             }
             return sum;
         }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/223203/homework/problems/11466?navref=cl_tt_lst_sl
+        public static int MinorDiagonalSum(List<List<int>> A)
+        {
+            int sum = 0;
+            int j = A[0].Count - 1;
+            for (int row=0; row < A.Count; row++)
+            {
+
+                sum+= A[row][j];
+                j--;
+            }
+
+            return sum;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/223203/homework/problems/11616?navref=cl_tt_lst_sl
+        public static List<List<int>> AddTheMatrices(List<List<int>> A, List<List<int>> B)
+        {
+            List<List<int>> result = new List<List<int>>();
+
+            for (int row = 0; row < A.Count; row++)
+            {
+                List<int> subArray = new List<int>();
+                for(int col = 0; col < A[0].Count; col++)
+                {
+                    int sum = A[row][col] + B[row][col];
+                    subArray.Add(sum);
+                }
+                result.Add(subArray);
+            }
+
+            return result;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/223203/homework/problems/11613?navref=cl_tt_lst_sl
+        public static List<List<int>> MatrixScalarProduct(List<List<int>> A, int B)
+        {
+            for(int row =  0; row < A.Count; row++)
+            {
+                for(int col = 0;col < A[0].Count; col++)
+                {
+                    A[row][col] = A[row][col] * B;
+                }
+            }
+
+            return A;
+        }
+
+
     }
 }
