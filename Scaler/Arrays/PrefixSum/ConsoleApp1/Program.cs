@@ -18,6 +18,9 @@ class Solution
         _2DArray.ColumnSum(new List<List<int>> { new List<int> { 1, 2, 3, 4 }, new List<int> { 5, 6, 7, 8 }, new List<int> { 9, 2, 3, 4 } });
         _2DArray.RowSum(new List<List<int>> { new List<int> { 1, 2, 3, 4 }, new List<int> { 5, 6, 7, 8 }, new List<int> { 9, 2, 3, 4 } });
         _2DArray.MatrixTranspose(new List<List<int>> { new List<int> { 1, 2, 3 }, new List<int> { 4, 5, 6 }, new List<int> { 7, 8, 9 } });
+
+
+        StringProblems.ReverseAString("scaler");
     }
 
 }

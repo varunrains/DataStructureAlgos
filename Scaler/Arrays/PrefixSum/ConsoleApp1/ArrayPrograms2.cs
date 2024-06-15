@@ -141,24 +141,51 @@ namespace ArraysDSA
             return subArrayCount;
         }
 
+        //https://www.scaler.com/academy/mentee-dashboard/class/223211/homework/problems/4033?navref=cl_tt_lst_sl
+        //This can be achieved through the sliding window
         public static int MinimumSwaps(List<int> A, int B)
         {
-            int swaps = 0;
-            int counter = 0;
-            for(int l=0;l<A.Count;l++)
+            int windowSize = 0;
+            //First find the number of items less than or equal to B to get the window size
+            for (int i = 0; i < A.Count; i++)
             {
-                if (A[l] <= B && counter != l)
+                if (A[i] <= B)
                 {
-                    var temp = A[l];
-                    A[l] = A[counter];
-                    A[counter] = temp;
-                    swaps++;
-                    counter++;
+                    windowSize++;
                 }
             }
 
-            return swaps;
+            int greaterThanB = 0;
+            //Check for the first window size
+            for (int i = 0; i < windowSize; i++)
+            {
+                if (A[i] > B)
+                {
+                    greaterThanB++;
+                }
+            }
+            int result = greaterThanB;
+            //Check from the next window size -- slide the window
+            for (int i = 1; i < A.Count - windowSize; i++)
+            {
+                if (A[i - 1] > B)
+                {
+                    //As this item is now removed from the window
+                    greaterThanB--;
+                }
+                if (A[i + windowSize - 1] > B)
+                {
+                    //For the new element in the window add check if it is greater
+                    greaterThanB++;
+                }
+                //As we need to find the minimum swaps, in each window check if it is minimum
+                if (greaterThanB < result)
+                {
+                    result = greaterThanB;
+                }
 
+            }
+            return result;
         }
 
         public static int SubArrayWithGivenSumAndLength(List<int> A, int B, int C)
