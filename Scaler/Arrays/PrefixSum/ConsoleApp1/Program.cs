@@ -23,6 +23,7 @@ class Solution
         StringProblems.ReverseAString("scaler");
         StringProblems.ToggleTheString("FbxdWdoKwrezJPP");
         StringProblems.LongestPalindrome("aaaabaaa");
+        StringProblems.CountOccurences("rbobobbobljzjdbobbobpncbobobobadbobvlrrbobmypibobbqiycbobdcpbobybobgjqgbobuccboboybobmbob");
     }
 
 }

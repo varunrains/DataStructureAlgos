@@ -109,5 +109,62 @@ namespace ArraysDSA
 
             return A.Substring(startIndex, substringLength);
         }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/223205/homework/problems/10748/submissions
+        public static int CountOccurences(string A)
+        {
+            var matchTo = "bob";
+            int counter = 0;
+            int j = 0;
+            for (int i = 0; i < A.Length; i++)
+            {
+                if (A[i] != matchTo[j])
+                {
+                    if(j > 0)
+                    {
+                        i--;
+                    }
+                    j = 0;
+                    continue;
+                }
+                else
+                {
+                    j++;
+                    if(j == matchTo.Length)
+                    {
+                        i--;
+                        j = 0;
+                        counter++;
+                    }
+                }
+            }
+
+            return counter;
+
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/223205/homework/problems/10695?navref=cl_tt_nv
+        public static int IsAlphaNumeric(List<char> A)
+        {
+            int counter = 0;
+            for(int i=0; i<A.Count; i++)
+            {
+                if(A[i] >= 65 &&  A[i] <= 90)
+                {
+                   counter++;
+                }
+
+               else if(A[i] >= 48 && A[i] <= 57)
+                {
+                    counter++;
+                }
+                else if(A[i] >= 97 && A[i] <= 122)
+                {
+                    counter++;
+                }
+            }
+            var result = counter == A.Count ? 1 : 0;
+            return result;
+        }
     }
 }
