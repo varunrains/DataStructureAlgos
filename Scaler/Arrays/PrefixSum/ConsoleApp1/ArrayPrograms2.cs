@@ -36,7 +36,7 @@ namespace ArraysDSA
             {
                 result.Add(A[start]);
 
-                
+
             }
             return result;
         }
@@ -44,26 +44,26 @@ namespace ArraysDSA
         public static int BestTimeToBuyStock(List<int> A)
         {
             int l_minIndex = 0;
-            int l_maxIndex = A.Count -1;
-            if(A.Count <= 0) { return 0; }
+            int l_maxIndex = A.Count - 1;
+            if (A.Count <= 0) { return 0; }
             int maximumNumber = int.MinValue;
             int minimumNumber = int.MaxValue;
 
-            for(int i=0;i<A.Count;i++)
+            for (int i = 0; i < A.Count; i++)
             {
-               
+
                 if (A[i] < minimumNumber)
                 {
-                    
+
                     minimumNumber = A[i];
                     l_minIndex = i;
                 }
                 if (A[i] > maximumNumber)
                 {
-                    
+
                     maximumNumber = A[i];
                     l_maxIndex = i;
-                    
+
                 }
             }
             if (l_minIndex >= l_maxIndex) return 0;
@@ -75,7 +75,7 @@ namespace ArraysDSA
             int left = 0, right = 0;
             int ans = 0;
             Dictionary<string, int> hashMap = new Dictionary<string, int>();
-            for(int i=0;i<A.Count;i++)
+            for (int i = 0; i < A.Count; i++)
             {
                 if (hashMap.ContainsKey(A[i].ToString()))
                 {
@@ -90,7 +90,7 @@ namespace ArraysDSA
             }
 
             return ans;
-          
+
 
             //Dictionary<string, int> counterMap = new Dictionary<string, int>();
             //for (int i= 0; i < result.Count; i++)
@@ -111,11 +111,11 @@ namespace ArraysDSA
             //        {
             //            count++;
             //        }
-                    
+
             //    }
 
             //    counterMap.Clear();
-                
+
             //}
             //Since the number of subarrays could be large, return value % 109 +7.
             //return result.Count % 1000000007;
@@ -230,15 +230,16 @@ namespace ArraysDSA
             }
             minSum = sum;
 
-            for (int r = B; r < A.Count; r++) {
+            for (int r = B; r < A.Count; r++)
+            {
                 int l = r - B;
                 sum += A[r] - A[l];
                 var result = Math.Min(minSum, sum);
-                if(result != minSum)
+                if (result != minSum)
                 {
                     minSum = result;
                     //As the left index will be one behind
-                    returnMinIndex = l+1;
+                    returnMinIndex = l + 1;
                 }
             }
 
@@ -250,7 +251,7 @@ namespace ArraysDSA
             int maxElement = int.MinValue;
             int minElement = int.MaxValue;
 
-            for(int i=0;i<A.Count;i++)
+            for (int i = 0; i < A.Count; i++)
             {
                 if (A[i] < minElement)
                 {
@@ -266,11 +267,11 @@ namespace ArraysDSA
             //Go over an array and store the min and max index/ max and min index
             //whichever comes first and then calculate the length of the subarray
             //by formula R-L+1 to get the length
-            
+
             int l_min = -1;
             int l_max = -1;
             int ans = int.MaxValue; //Minimum length of subarray
-            for(int i = 0; i < A.Count; i++)
+            for (int i = 0; i < A.Count; i++)
             {
                 if (A[i] == minElement)
                 {
@@ -284,8 +285,8 @@ namespace ArraysDSA
 
                 if (A[i] == maxElement)
                 {
-                    l_max  = i;
-                    if(l_min != -1)
+                    l_max = i;
+                    if (l_min != -1)
                     {
                         ans = Math.Min(ans, l_max - l_min + 1);
                     }
@@ -293,6 +294,50 @@ namespace ArraysDSA
             }
 
             return ans;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/223211/homework/problems/16094?navref=cl_tt_lst_nm
+        public static int GoodSubArrays(List<int> A, int B)
+        {
+            //find the prefix sum
+            List<int> prefixSumArray = new List<int>
+            {
+                A[0]
+            };
+            int goodSubarrayCount = 0;
+            var toAdd = 0;
+            for (int i = 1; i < A.Count; i++)
+            {
+                toAdd = prefixSumArray[i - 1] + A[i];
+                prefixSumArray.Add(toAdd);
+            }
+
+            for (int l = 0; l < A.Count; l++)
+            {
+                for (int r = l; r < A.Count; r++)
+                {
+                    var len = r - l + 1;
+                    //even sub-array
+                    if (len % 2 == 0)
+                    {
+                        var evenTotalValue = l == 0 ? prefixSumArray[r] : prefixSumArray[r] - prefixSumArray[l - 1];
+                        if (evenTotalValue < B)
+                        {
+                            goodSubarrayCount++;
+                        }
+                    }
+                    else
+                    {
+                        var oddTotalValue = l == 0 ? prefixSumArray[r] : prefixSumArray[r] -  prefixSumArray[l - 1];
+                        if (oddTotalValue > B)
+                        {
+                            goodSubarrayCount++;
+                        }
+                    }
+                }
+            }
+
+            return goodSubarrayCount;
         }
     }
 }
