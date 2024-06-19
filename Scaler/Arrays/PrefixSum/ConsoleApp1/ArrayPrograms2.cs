@@ -43,31 +43,24 @@ namespace ArraysDSA
 
         public static int BestTimeToBuyStock(List<int> A)
         {
-            int l_minIndex = 0;
-            int l_maxIndex = A.Count - 1;
+           
             if (A.Count <= 0) { return 0; }
-            int maximumNumber = int.MinValue;
-            int minimumNumber = int.MaxValue;
+            int buyValue = int.MaxValue;
+            int profit = 0;
 
             for (int i = 0; i < A.Count; i++)
             {
-
-                if (A[i] < minimumNumber)
+                if (A[i] < buyValue)
                 {
-
-                    minimumNumber = A[i];
-                    l_minIndex = i;
+                    buyValue = A[i];
                 }
-                if (A[i] > maximumNumber)
+                else
                 {
-
-                    maximumNumber = A[i];
-                    l_maxIndex = i;
-
+                    profit = Math.Max(profit, A[i] - buyValue);
                 }
             }
-            if (l_minIndex >= l_maxIndex) return 0;
-            return maximumNumber - minimumNumber;
+
+            return profit;
         }
 
         public static int CountUniqueSubarrays(List<int> A)
@@ -299,7 +292,7 @@ namespace ArraysDSA
         //https://www.scaler.com/academy/mentee-dashboard/class/223211/homework/problems/16094?navref=cl_tt_lst_nm
         public static int GoodSubArrays(List<int> A, int B)
         {
-            //find the prefix sum
+            //find the prefix sum as we are intereseted in the sub-array sum
             List<int> prefixSumArray = new List<int>
             {
                 A[0]
@@ -326,6 +319,7 @@ namespace ArraysDSA
                             goodSubarrayCount++;
                         }
                     }
+                    //odd subarray
                     else
                     {
                         var oddTotalValue = l == 0 ? prefixSumArray[r] : prefixSumArray[r] -  prefixSumArray[l - 1];
@@ -338,6 +332,24 @@ namespace ArraysDSA
             }
 
             return goodSubarrayCount;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/223209/homework/problems/11921?navref=cl_tt_lst_nm
+        public static List<int> LeadersInAnArray(List<int> A)
+        {
+            int maxValue = int.MinValue;
+            List<int> result = new List<int>();
+
+            for(int i= A.Count-1; i>=0; i--)
+            {
+
+                if (A[i] > maxValue)
+                {
+                    maxValue = A[i];
+                    result.Add(maxValue);
+                }
+            }
+            return result;
         }
     }
 }
