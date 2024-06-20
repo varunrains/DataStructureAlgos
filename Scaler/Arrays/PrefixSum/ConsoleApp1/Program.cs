@@ -7,6 +7,7 @@ class Solution
         //  ArrayPrograms.rangeSum(new List<int> { 1, 2, 3, 4, 5 }, new List<List<int>>() { new List<int>() { 0,3 }, new List<int>() { 1, 2 } });
         // ArrayPrograms.calculateSpecialIndex(new List<int> { 1, 2, 3, 7,1,2,3 });
         ArrayPrograms.calculateSpecialSequence("ABCGAG");
+        ArrayPrograms.PickFromBothSides(new List<int>() { 5, -2, 3, 1, 2 }, 3);
         ArrayPrograms2.GenerateSubArrays(new List<int>() { 1, 2, 3 });
         ArrayPrograms2.GenerateSubArraysInRange(new List<int>() { 4, 3, 2, 6 },1,3);
         ArrayPrograms2.CountUniqueSubarrays(new List<int>() { 93, 9, 12, 32, 97, 75, 32, 77, 40, 79, 61, 42, 57, 19, 64, 16, 86, 47, 41, 67, 76, 63, 24, 10, 25, 96, 1, 30, 73, 91, 70, 65, 53, 75, 5, 19, 65, 6, 96, 33, 73, 55, 4, 90, 72, 83, 54, 78, 67, 56, 8, 70, 43, 63 });
@@ -25,6 +26,9 @@ class Solution
         StringProblems.ToggleTheString("FbxdWdoKwrezJPP");
         StringProblems.LongestPalindrome("aaaabaaa");
         StringProblems.CountOccurences("rbobobbobljzjdbobbobpncbobobobadbobvlrrbobmypibobbqiycbobdcpbobybobgjqgbobuccboboybobmbob");
+
+        Scaler1stTest.FindtheMinimumAverageSubArray(new List<int>() { 46,10,15,44,45,29,39,7,50,33,3,7,25,50,5,22,30,23,0 }, 1,22);
+        Scaler1stTest.PositiveInRangeWithQQueries(new List<int>() { 1, -1, 0 }, new List<List<int>>() { new List<int> { 0,2 }, new List<int> { 1,2 } });
     }
 
 }

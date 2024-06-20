@@ -166,5 +166,46 @@ namespace ArraysDSA
             var result = counter == A.Count ? 1 : 0;
             return result;
         }
+
+        public static int Anagrams(string A, string B)
+        {
+
+            if (A.Length != B.Length) return 0;
+            Dictionary<string, int> map = new Dictionary<string, int>();
+
+            for(int i = 0; i < A.Length; i++)
+            {
+                if (map.ContainsKey(A[i].ToString()))
+                {
+                    map[A[i].ToString()]++;
+                }
+                else
+                {
+                    map.Add(A[i].ToString(), 1);
+                }
+            }
+
+            for(int i = 0; i < B.Length; i++)
+            {
+                if (map.ContainsKey(B[i].ToString()))
+                {
+                    
+                    map[B[i].ToString()]--;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+
+            foreach(var dic in map) {
+                if(dic.Value > 0)
+                {
+                    return 0;
+                }
+            }
+
+            return 1;
+        }
     }
 }

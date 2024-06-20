@@ -102,6 +102,28 @@ namespace ConsoleApp1
                 return count;
         }
 
+        public static int PickFromBothSides(List<int> A, int B)
+        {
+            int i = 0;
+            int j = A.Count - 1;
+            int maximumPossibleSum = 0;
+            int counter = B;
+            while (counter > 0)
+            {
+                if (A[i] > A[j])
+                {
+                    maximumPossibleSum += A[i];
+                    i++;
+                }
+                else if (A[i] < A[j])
+                {
+                    maximumPossibleSum += A[j];
+                    j--;
+                }
+              counter--;
+            }
+            return maximumPossibleSum;
+        }
 
         public static long calculateSpecialSequence(string A)
         {
