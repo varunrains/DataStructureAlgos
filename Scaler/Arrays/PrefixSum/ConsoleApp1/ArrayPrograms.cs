@@ -102,27 +102,63 @@ namespace ConsoleApp1
                 return count;
         }
 
-        public static int PickFromBothSides(List<int> A, int B)
+        //https://www.scaler.com/academy/mentee-dashboard/class/223209/homework/problems/9900?navref=cl_tt_lst_sl
+        //Good Explanation in the below video
+        //https://www.youtube.com/watch?v=XJZczN4wts0
+        public static long PickFromBothSides(List<int> A, int B)
         {
-            int i = 0;
-            int j = A.Count - 1;
-            int maximumPossibleSum = 0;
-            int counter = B;
-            while (counter > 0)
+            long totalSum = 0;
+            long maximumSum = int.MinValue;
+
+            List<int> prefixSum = new List<int>
             {
-                if (A[i] > A[j])
-                {
-                    maximumPossibleSum += A[i];
-                    i++;
-                }
-                else if (A[i] < A[j])
-                {
-                    maximumPossibleSum += A[j];
-                    j--;
-                }
-              counter--;
+                A[0]
+            };
+
+            for (int i=0; i<A.Count; i++)
+            {
+                totalSum += A[i];
             }
-            return maximumPossibleSum;
+
+            if (B == A.Count)
+            {
+                return totalSum;
+            }
+
+
+            for (int i = 1; i < A.Count; i++)
+            {
+                var toAdd = prefixSum[i-1] + A[i];
+                prefixSum.Add(toAdd);
+            }
+
+            //We will pick the excluded items sum so that we will get 
+            //the continuous elements in  a range to loop
+            int startIndex = 0;
+            int endIndex = A.Count - B - 1;
+            while (endIndex < A.Count)
+            {
+                int rangeSum = 0;
+                if (startIndex == 0)
+                {
+                    rangeSum = prefixSum[endIndex];
+                }
+                else {
+
+                    rangeSum = prefixSum[endIndex] - prefixSum[startIndex - 1];
+                }
+                
+                if(maximumSum < (totalSum - rangeSum))
+                {
+                    maximumSum = totalSum - rangeSum;
+                }
+
+                startIndex++;
+                endIndex++;
+            }
+
+            return maximumSum;
+
         }
 
         public static long calculateSpecialSequence(string A)
