@@ -17,6 +17,10 @@ class Solution
         ArrayPrograms2.GoodSubArrays(new List<int>() { 3, 12, 11, 11, 11, 15 }, 12);
        // ArrayPrograms2.SubarrayWithLeastAverage(new List<int>() { 3, 7, 90, 20, 10, 50, 40 }, 3);
         ArrayPrograms2.SubarrayWithLeastAverage(new List<int>() { 20, 3, 13, 5, 10, 14, 8, 5, 11, 9, 1, 11 }, 9);
+        ArrayPrograms3.LengthOfLongestConsecutiveOnes("111000");
+        ArrayPrograms3.CountIncreasingTriplets(new List<int> { 1, 16, 26, 17, 27, 26, 4 });
+        ArrayPrograms3.RepeatN3Numbers(new List<int> { 1 });
+        ArrayPrograms3.MajorityElement(new List<int> { 1, 1, 1, 2, 3, 5, 7 });
         _2DArray.ColumnSum(new List<List<int>> { new List<int> { 1, 2, 3, 4 }, new List<int> { 5, 6, 7, 8 }, new List<int> { 9, 2, 3, 4 } });
         _2DArray.RowSum(new List<List<int>> { new List<int> { 1, 2, 3, 4 }, new List<int> { 5, 6, 7, 8 }, new List<int> { 9, 2, 3, 4 } });
         _2DArray.MatrixTranspose(new List<List<int>> { new List<int> { 1, 2, 3 }, new List<int> { 4, 5, 6 }, new List<int> { 7, 8, 9 } });

@@ -65,51 +65,31 @@ namespace ArraysDSA
 
         public static int CountUniqueSubarrays(List<int> A)
         {
-            int left = 0, right = 0;
-            int ans = 0;
-            Dictionary<string, int> hashMap = new Dictionary<string, int>();
-            for (int i = 0; i < A.Count; i++)
+            int uniqueSubArrays = 0;
+            for(int i=0;i<A.Count; i++)
             {
-                if (hashMap.ContainsKey(A[i].ToString()))
+                for(int j = i; j < A.Count; j++)
                 {
-                    hashMap[A[i].ToString()]++;
+                    //Dictionary<int, int> map = new Dictionary<int, int>();
+                    List<int> subArray = new List<int>();
+                    for (int k = i; k <= j; k++)
+                    {
+                        if (subArray.Contains(A[k]))
+                        {
+
+                            break;
+                        }
+                        subArray.Add(A[k]);
+                        if(k == j)
+                        {
+                            uniqueSubArrays++;
+                        }
+                    }
                 }
-                else
-                {
-                    hashMap.Add(A[i].ToString(), 1);
-                }
-                ans += right - left + 1;
-                right++;
             }
 
-            return ans;
+            return uniqueSubArrays % 1000000007;
 
-
-            //Dictionary<string, int> counterMap = new Dictionary<string, int>();
-            //for (int i= 0; i < result.Count; i++)
-            //{
-
-            //    for (int j = 0; j < result[i].Count; j++)
-            //    {
-            //        if (!counterMap.ContainsKey(result[i][j].ToString()))
-            //        {
-            //            counterMap.Add(result[i][j].ToString(), 1);
-            //        }
-            //        else
-            //        {
-            //            counterMap[result[i][j].ToString()]++;
-            //            break;
-            //        }    
-            //       if(j== result[i].Count - 1)
-            //        {
-            //            count++;
-            //        }
-
-            //    }
-
-            //    counterMap.Clear();
-
-            //}
             //Since the number of subarrays could be large, return value % 109 +7.
             //return result.Count % 1000000007;
         }
