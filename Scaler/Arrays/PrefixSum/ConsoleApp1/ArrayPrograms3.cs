@@ -109,54 +109,74 @@ namespace ArraysDSA
         //https://www.scaler.com/academy/mentee-dashboard/class/223199/assignment/problems/27363?navref=cl_tt_lst_nm
         public static int CountIncreasingTriplets(List<int> A)
         {
-            int tripletCount = 0;
-            int triplet = 2;
-            int highestNumber;
+            int N = A.Count;
+            if (N < 3) return 0;
+
+            int[] leftSmaller = new int[N];
+            int[] rightLarger = new int[N];
+
+            //Calculate the smaller elements left to the current position
+            for (int i = 1; i < A.Count; i++)
+            {
+                var left = i - 1;
+                while (left >= 0)
+                {
+                    if (A[left] < A[i])
+                    {
+                        leftSmaller[i]++;
+                    }
+                    left--;
+                }
+            }
+
+            //Calculate the bigger elements right to the current position
             for (int i = 0; i < A.Count; i++)
             {
-                int r = i + 1;
-                triplet = 2;
-                highestNumber = int.MinValue;
-                while (A.Count - i >= 3 && r < A.Count)
+                var right = i + 1;
+                while (right < A.Count)
                 {
-                    if (A[i] < A[r] && highestNumber == int.MinValue)
+                    if (A[i] < A[right])
                     {
-                        highestNumber = A[r];
-                        triplet--;
-                    }else if(highestNumber !=  int.MinValue && highestNumber < A[r])
-                    {
-                        triplet--;
+                        rightLarger[i]++;
                     }
-
-                    if (triplet == 0)
-                    {
-                        tripletCount++;
-                        triplet = 2;
-                        //highestNumber = int.MinValue;
-                    }
-                    r++;
+                    right++;
                 }
+            }
+
+            // Calculate the number of valid triplets
+            int tripletCount = 0;
+            //First and the last element cannot be in a triplet calculation 
+            for (int j = 1; j < N - 1; j++)
+            {
+                tripletCount += leftSmaller[j] * rightLarger[j];
             }
 
             return tripletCount;
         }
+
+     
 
         //https://www.scaler.com/academy/mentee-dashboard/class/223199/homework/problems/275/hints?navref=cl_pb_nv_tb
         public static int ColorFulNumbers(int A)
         {
             string s = A.ToString();
             List<int> numbers = new List<int>();
-            Dictionary<string, int> map = new Dictionary<string, int>();
+            var isTrue = false;
+            Dictionary<int, int> map = new Dictionary<int, int>();
             for(int i = 0; i < s.Length; i++)
             {
-                numbers.Add(int.Parse(s[i].ToString()));
-                for (int j=i+1; j < s.Length; j++)
+                int productValue = int.Parse(s[i].ToString())* 1;
+                isTrue = map.TryAdd(productValue, 1);
+                if (!isTrue) return 0;
+                for (int j=i+1; j < s.Length && j-i == 1; j++)
                 {
-                    map.Add(s[i].ToString(), 1);
+                    productValue *= int.Parse(s[j].ToString());
+                    isTrue = map.TryAdd(productValue, 1);
+                    if (!isTrue) return 0;
                 }
             }
 
-            return 0;
+            return 1;
         }
 
         //https://www.scaler.com/academy/mentee-dashboard/class/223199/homework/problems/67?navref=cl_tt_lst_nm

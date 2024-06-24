@@ -18,7 +18,7 @@ class Solution
        // ArrayPrograms2.SubarrayWithLeastAverage(new List<int>() { 3, 7, 90, 20, 10, 50, 40 }, 3);
         ArrayPrograms2.SubarrayWithLeastAverage(new List<int>() { 20, 3, 13, 5, 10, 14, 8, 5, 11, 9, 1, 11 }, 9);
         ArrayPrograms3.LengthOfLongestConsecutiveOnes("111000");
-        ArrayPrograms3.CountIncreasingTriplets(new List<int> { 1, 16, 26, 17, 27, 26, 4 });
+        ArrayPrograms3.CountIncreasingTriplets(new List<int> { 18, 26, 17, 30, 13, 30, 20, 13, 10, 19 });
         ArrayPrograms3.RepeatN3Numbers(new List<int> { 1 });
         ArrayPrograms3.MajorityElement(new List<int> { 1, 1, 1, 2, 3, 5, 7 });
         _2DArray.ColumnSum(new List<List<int>> { new List<int> { 1, 2, 3, 4 }, new List<int> { 5, 6, 7, 8 }, new List<int> { 9, 2, 3, 4 } });
@@ -30,6 +30,7 @@ class Solution
         StringProblems.ToggleTheString("FbxdWdoKwrezJPP");
         StringProblems.LongestPalindrome("aaaabaaa");
         StringProblems.CountOccurences("rbobobbobljzjdbobbobpncbobobobadbobvlrrbobmypibobbqiycbobdcpbobybobgjqgbobuccboboybobmbob");
+        StringProblems.LongestCommonPrefix(new List<string>() { "abab", "ab", "acbcd" });
 
         Scaler1stTest.FindtheMinimumAverageSubArray(new List<int>() { 46,10,15,44,45,29,39,7,50,33,3,7,25,50,5,22,30,23,0 }, 1,22);
         Scaler1stTest.PositiveInRangeWithQQueries(new List<int>() { 1, -1, 0 }, new List<List<int>>() { new List<int> { 0,2 }, new List<int> { 1,2 } });

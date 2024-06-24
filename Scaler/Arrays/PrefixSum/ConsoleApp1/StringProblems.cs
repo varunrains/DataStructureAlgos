@@ -11,14 +11,14 @@ namespace ArraysDSA
         //
         public static string ReverseAString(string A)
         {
-           
+
             //It is alway wise to use a stringbuilder in loops 
             //as strings are immutable
             //Internally StringBuilder will convert the string to a char array and will
             //perform the operation which will result in less time complexity O(N)
             //If you use normal string and append then it will be additional time complexity of O(N)
             StringBuilder result = new StringBuilder();
-            for (int i = A.Length-1; i >=0; i--)
+            for (int i = A.Length - 1; i >= 0; i--)
             {
                 result.Append(A[i]);
             }
@@ -35,11 +35,12 @@ namespace ArraysDSA
             for (int i = 0; i < A.Length; i++)
             {
                 //If the character is lowercase
-                if(A[i] >= 96 &&  A[i] <= 122)
+                if (A[i] >= 96 && A[i] <= 122)
                 {
                     var toUpperCase = (char)(A[i] - 32);
                     result.Append(toUpperCase);
-                }else if(A[i] >= 65 && A[i] <= 90)
+                }
+                else if (A[i] >= 65 && A[i] <= 90)
                 {
                     var toLowerCase = (char)(A[i] + 32);
                     result.Append(toLowerCase);
@@ -59,16 +60,16 @@ namespace ArraysDSA
             string oddSubstring = string.Empty;
             int oddLeftIndex = 0;
             int evenLeftIndex = 0;
-            for(int i=0; i<A.Length; i++)
+            for (int i = 0; i < A.Length; i++)
             {
                 int l;
                 int r;
                 l = r = i;
                 oddLength = 1; //reset the length
-                while(l >=0 && r < A.Length && A[l] == A[r])
+                while (l >= 0 && r < A.Length && A[l] == A[r])
                 {
 
-                    if(oddLength > oddAns)
+                    if (oddLength > oddAns)
                     {
                         oddAns = oddLength;
                         oddLeftIndex = l;
@@ -86,7 +87,7 @@ namespace ArraysDSA
             string evenSubstring = string.Empty;
             for (int i = 1; i < A.Length; i++)
             {
-                int l = i-1;
+                int l = i - 1;
                 int r;
                 r = i;
                 evenLength = 2; //reset the length
@@ -96,7 +97,7 @@ namespace ArraysDSA
                     if (evenLength > evenAns)
                     {
                         evenAns = evenLength;
-                        evenLeftIndex = l ;
+                        evenLeftIndex = l;
                     }
                     l--;
                     r++;
@@ -120,7 +121,7 @@ namespace ArraysDSA
             {
                 if (A[i] != matchTo[j])
                 {
-                    if(j > 0)
+                    if (j > 0)
                     {
                         i--;
                     }
@@ -130,7 +131,7 @@ namespace ArraysDSA
                 else
                 {
                     j++;
-                    if(j == matchTo.Length)
+                    if (j == matchTo.Length)
                     {
                         i--;
                         j = 0;
@@ -147,18 +148,18 @@ namespace ArraysDSA
         public static int IsAlphaNumeric(List<char> A)
         {
             int counter = 0;
-            for(int i=0; i<A.Count; i++)
+            for (int i = 0; i < A.Count; i++)
             {
-                if(A[i] >= 65 &&  A[i] <= 90)
-                {
-                   counter++;
-                }
-
-               else if(A[i] >= 48 && A[i] <= 57)
+                if (A[i] >= 65 && A[i] <= 90)
                 {
                     counter++;
                 }
-                else if(A[i] >= 97 && A[i] <= 122)
+
+                else if (A[i] >= 48 && A[i] <= 57)
+                {
+                    counter++;
+                }
+                else if (A[i] >= 97 && A[i] <= 122)
                 {
                     counter++;
                 }
@@ -173,7 +174,7 @@ namespace ArraysDSA
             if (A.Length != B.Length) return 0;
             Dictionary<string, int> map = new Dictionary<string, int>();
 
-            for(int i = 0; i < A.Length; i++)
+            for (int i = 0; i < A.Length; i++)
             {
                 if (map.ContainsKey(A[i].ToString()))
                 {
@@ -185,11 +186,11 @@ namespace ArraysDSA
                 }
             }
 
-            for(int i = 0; i < B.Length; i++)
+            for (int i = 0; i < B.Length; i++)
             {
                 if (map.ContainsKey(B[i].ToString()))
                 {
-                    
+
                     map[B[i].ToString()]--;
                 }
                 else
@@ -198,14 +199,81 @@ namespace ArraysDSA
                 }
             }
 
-            foreach(var dic in map) {
-                if(dic.Value > 0)
+            foreach (var dic in map)
+            {
+                if (dic.Value > 0)
                 {
                     return 0;
                 }
             }
 
             return 1;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/223205/homework/problems/176?navref=cl_tt_lst_sl
+        public static string LongestCommonPrefix(List<string> A)
+        {
+            string tempString = string.Empty;
+            StringBuilder longestCommonPrefix = new StringBuilder();
+            int minCount = int.MaxValue;
+            for (int i = 0; i < A.Count; i++)
+            {
+                if (A[i].Length < minCount)
+                {
+                    minCount = A[i].Length;
+                    tempString = A[i];
+                }
+            }
+
+            for (int i = 0; i < tempString.Length; i++)
+            {
+                for (int j = 0; j < A.Count; j++)
+                {
+                    if (A[j][i] == tempString[i])
+                    {
+                        if (j == A.Count - 1)
+                        {
+                            longestCommonPrefix.Append(tempString[i]);
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            return longestCommonPrefix.ToString();
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/223205/homework/problems/1054?navref=cl_tt_nv
+        public static int AmazingSubArrays(string A)
+        {
+            int amazingSubArrays = 0;
+            for (int i = 0; i < A.Length; i++)
+            {
+                if (IsVowel(A[i]))
+                {
+                    //As in the question it was mentioned that the number of amazing sub-array count will be large
+                    //use mod. But it is confusing to add a modulo in between the answer
+                    //If the answer is out of range then please use the mod for intermediate steps as well
+                    //One more clue if the value is more than 10003 then you might need to apply this mod for any answer
+                    amazingSubArrays = (amazingSubArrays + (A.Length - i) % 10003)% 10003;
+                }
+            }
+
+            return amazingSubArrays;
+        }
+
+        private static bool IsVowel(char A)
+        {
+            
+            if(A == 'a' || A == 'e' || A == 'i' || A == 'o' || A == 'u' 
+                || A == 'A' || A == 'E' || A == 'I' || A == 'O' || A == 'U')
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
