@@ -209,6 +209,42 @@ namespace ArraysDSA
             var result = maxFrequency > a.Count / 3 ? maxNumber : -1;
             return result;
         }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235836/assignment/problems/56?navref=cl_tt_lst_nm
+        //This approach to find the maximum subarray is also called kadane's algorithm
+        public static int MaximumSubArray(List<int> A)
+        {
+            //Just to find the find the indexes of the largest subarray
+            int L = 0;
+            int R = 0;
+            int result = int.MinValue;
+            int sum = 0;
+
+            if (A.Count == 1)
+            {
+                return A[0];
+            }
+
+            for (int i = 0; i < A.Count; i++)
+            {
+                sum += A[i];
+
+                if (result < sum)
+                {
+                    result = sum;
+                    R = i;
+                }
+
+                if (sum < 0)
+                {
+                    L = i + 1;
+                    sum = 0;
+                }
+            }
+
+            return result;
+
+        }
     }
 
 

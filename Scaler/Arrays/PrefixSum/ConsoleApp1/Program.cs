@@ -21,6 +21,8 @@ class Solution
         ArrayPrograms3.CountIncreasingTriplets(new List<int> { 18, 26, 17, 30, 13, 30, 20, 13, 10, 19 });
         ArrayPrograms3.RepeatN3Numbers(new List<int> { 1 });
         ArrayPrograms3.MajorityElement(new List<int> { 1, 1, 1, 2, 3, 5, 7 });
+        ArrayPrograms3.MaximumSubArray(new List<int> { -2, 1, -3, 4, -1, 2, 1, -5, 4 });
+
         _2DArray.ColumnSum(new List<List<int>> { new List<int> { 1, 2, 3, 4 }, new List<int> { 5, 6, 7, 8 }, new List<int> { 9, 2, 3, 4 } });
         _2DArray.RowSum(new List<List<int>> { new List<int> { 1, 2, 3, 4 }, new List<int> { 5, 6, 7, 8 }, new List<int> { 9, 2, 3, 4 } });
         _2DArray.MatrixTranspose(new List<List<int>> { new List<int> { 1, 2, 3 }, new List<int> { 4, 5, 6 }, new List<int> { 7, 8, 9 } });
