@@ -22,6 +22,7 @@ class Solution
         ArrayPrograms3.RepeatN3Numbers(new List<int> { 1 });
         ArrayPrograms3.MajorityElement(new List<int> { 1, 1, 1, 2, 3, 5, 7 });
         ArrayPrograms3.MaximumSubArray(new List<int> { -2, 1, -3, 4, -1, 2, 1, -5, 4 });
+        ArrayPrograms3.ContinuousSumQuery(5, new List<List<int>>() { new List<int>{ 1, 2, 10 }, new List<int> { 2, 3, 20 }, new List<int> { 2, 5, 25 } });
 
         _2DArray.ColumnSum(new List<List<int>> { new List<int> { 1, 2, 3, 4 }, new List<int> { 5, 6, 7, 8 }, new List<int> { 9, 2, 3, 4 } });
         _2DArray.RowSum(new List<List<int>> { new List<int> { 1, 2, 3, 4 }, new List<int> { 5, 6, 7, 8 }, new List<int> { 9, 2, 3, 4 } });

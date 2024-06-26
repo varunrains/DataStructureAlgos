@@ -107,6 +107,8 @@ namespace ArraysDSA
         }
 
         //https://www.scaler.com/academy/mentee-dashboard/class/223199/assignment/problems/27363?navref=cl_tt_lst_nm
+        //same approach can be used to find out the rain water trap problem
+        //Pre-process the data in the array and then use it to obtain the solution in linear time complexity
         public static int CountIncreasingTriplets(List<int> A)
         {
             int N = A.Count;
@@ -245,8 +247,32 @@ namespace ArraysDSA
             return result;
 
         }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235836/assignment/problems/440?navref=cl_tt_lst_nm
+        public static List<int> ContinuousSumQuery(int A, List<List<int>> B)
+        {
+            int[] beggarPot = new int[A];
+
+            for (int i = 0; i < B.Count; i++)
+            {
+                //to make it zero based index
+                var l = B[i][0]-1;
+                var r = B[i][1]-1;
+                var donation = B[i][2];
+                beggarPot[l] += donation;
+
+                if( r != A - 1)
+                {
+                    beggarPot[r+1] -= donation;
+                }
+            }
+
+            for(int i = 1; i < A ; i++)
+            {
+                beggarPot[i] = beggarPot[i - 1] + beggarPot[i];
+            }
+            return beggarPot.ToList();
+        }
     }
-
-
 
 }
