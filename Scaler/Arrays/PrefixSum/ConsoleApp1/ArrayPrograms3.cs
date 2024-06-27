@@ -273,6 +273,50 @@ namespace ArraysDSA
             }
             return beggarPot.ToList();
         }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235836/assignment/problems/47
+        public static int RainWaterTrap(List<int> A)
+        {
+            int trap = 0;
+            var maxArrayRight = new int[A.Count];
+            var maxArrayLeft = new int[A.Count];
+            //Precompute maximum and minimum array
+
+            maxArrayLeft[0] = A[0];
+            maxArrayRight[A.Count-1] = A[A.Count-1];
+
+            for (int i = 1; i < A.Count; i++)
+            {
+                if( A[i] > maxArrayLeft[i-1])
+                {
+                    maxArrayLeft[i] = A[i];
+                }
+                else
+                {
+                    maxArrayLeft[i] = maxArrayLeft[i-1];
+                }
+            }
+
+            for(int j=A.Count-2; j>=0; j--)
+            {
+                if (A[j] > maxArrayRight[j + 1])
+                {
+                    maxArrayRight[j] = A[j];
+                }
+                else
+                {
+                    maxArrayRight[j] = maxArrayRight[j+1];
+                }
+            }
+
+            //Rain water traps between buildings
+            for(int i=0; i < A.Count; i++)
+            {
+                trap += Math.Min(maxArrayLeft[i], maxArrayRight[i]) - A[i];
+            }
+
+            return trap;
+        }
     }
 
 }
