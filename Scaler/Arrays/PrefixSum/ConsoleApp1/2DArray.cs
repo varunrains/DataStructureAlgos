@@ -172,6 +172,105 @@ namespace ArraysDSA
             return A;
         }
 
+        //https://www.scaler.com/academy/mentee-dashboard/class/235834/assignment/problems/5784?navref=cl_tt_lst_nm
+        public static int FindtheNumberOfOnesInBinaryMatrix(List<List<int>> A)
+        {
+            int maxRowIndex = -1;
+            int maxCount = 0;
 
+            int row = 0, col = A[0].Count - 1;
+
+            while (row < A[0].Count && col >= 0)
+            {
+                if (A[row][col] == 1)
+                {
+                    col--;
+                    maxRowIndex = row;
+                    maxCount++;
+                }
+                else
+                {
+                    row++;
+                }
+            }
+
+            return maxRowIndex;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235834/assignment/problems/4092?navref=cl_tt_lst_nm
+        public static int SearchInSortedMatrix(List<List<int>> A, int B)
+        {
+            int row = 0;
+            int col = A[0].Count - 1;
+            int result = int.MaxValue;
+            while (row < A.Count && col >= 0)
+            {
+                if (A[row][col] == B)
+                {
+                    //Given in the question to return like this
+                    result = Math.Min(((row + 1) * 1009) + col + 1, result);
+                    col--;
+                }
+                else if (A[row][col] > B)
+                {
+                    col--;
+                }
+                else 
+                {
+                    row++;
+                }
+
+            }
+            if(result != int.MaxValue)
+            {
+                return result;
+            }
+            return -1;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235834/homework/problems/4033?navref=cl_tt_lst_nm
+        public static int MinimumSwaps(List<int> A, int B)
+        {
+            int windowSize = 0;
+            int greaterThanB = 0;
+
+            for (int i = 0; i < A.Count; i++)
+            {
+                if(A[i] <= B)
+                {
+                    windowSize++;
+                }
+            }
+
+            //First window to find the minimumSwaps
+            for(int i = 0; i < windowSize; i++)
+            {
+                if (A[i]>B)
+                {
+                    greaterThanB++;
+                }
+            }
+            int minimumSwaps = greaterThanB;
+            for (int i = 1; i < A.Count-windowSize; i++)
+            {
+                int l = i - 1;
+                int r = windowSize + i -1;
+
+                if (A[l] > B)
+                {
+                    greaterThanB--;
+                }
+                
+                if (A[r] > B)
+                {
+                    greaterThanB++;
+                }
+                minimumSwaps = Math.Min(minimumSwaps, greaterThanB);
+
+            }
+
+            return minimumSwaps;
+
+        }
     }
 }

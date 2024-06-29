@@ -321,62 +321,66 @@ namespace ArraysDSA
         //https://www.scaler.com/academy/mentee-dashboard/class/235836/homework/problems/66?navref=cl_tt_lst_nm
         public static List<int> AddOneToNumber(List<int> A)
         {
-            bool msbWithZero = true;
-            List<int> result = new List<int>();
-            if (A[A.Count - 1] != 9)
+            int i = 0;
+            //Remove leading zeros
+            while (i < A.Count)
             {
-                A[A.Count - 1] = A[A.Count - 1] + 1;
-                for(int i = 0; i < A.Count; i++)
-                {
-                    if (A[i] == 0 && A[0] == 0 && msbWithZero)
-                    {
-                        continue;
 
-                    }
-                    else
-                    {
-                        result.Add(A[i]);
-                        msbWithZero = !msbWithZero;
-                    }
+                if (A[i] == 0 && i - 1 < 0)
+                {
+                    A.RemoveAt(i);
+                    i = 0;
                 }
-                return result;
-            }
-            else
-            {
+                else
+                {
+                    break;
+                }
                 
-                string str = string.Empty;
-                int carryForward = 1;
-                for (int i = A.Count - 1; i >= 0; i--)
-                {
-                    if (A[i] != 0 && (A[i] + carryForward) % 10 == 0)
-                    {
-                        str = "0" + str;
-                        carryForward = 1;
-                    }
-                    else
-                    {
-                        str =  (A[i] + carryForward) + str;
-                        carryForward = 0;
-                    }
-                }
-                if (carryForward != 0)
-                {
-                    str = "1" + str;
-                }
-                 
-                for (int i = 0; i < str.Length; i++)
-                {
-
-                    if (i==0 && str[i].ToString() == "0")
-                    {
-                        continue;
-                    }
-                    result.Add(int.Parse(str[i].ToString()));
-                }
-
-                return result;
             }
-           
+            i = 0;
+            int j = A.Count - 1;
+            //Reverse the array so that it will become easy for the carry to add
+            while (i < j)
+            {
+                var temp = A[i];
+                A[i] = A[j]; 
+                A[j] = temp;
+                i++;
+                j--;
+            }
+            int carryforward = 1;
+            for(int k = 0; k < A.Count; k++)
+            {
+                A[k] = carryforward + A[k];
+
+                if (A[k] != 0 && (A[k] % 10 == 0))
+                {
+                    A[k] = 0;
+                }
+                else
+                {
+                    carryforward = 0;
+                }
+            }
+
+            if(carryforward != 0)
+            {
+                A.Add(carryforward);
+            }
+
+            i = 0;
+            j = A.Count - 1;
+            //Again reverse the array
+            while (i < j)
+            {
+                var temp = A[i];
+                A[i] = A[j];
+                A[j] = temp;
+                i++;
+                j--;
+            }
+
+            return A;
         }
     }
 }

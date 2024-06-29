@@ -24,12 +24,12 @@ class Solution
         ArrayPrograms3.MaximumSubArray(new List<int> { -2, 1, -3, 4, -1, 2, 1, -5, 4 });
         ArrayPrograms3.ContinuousSumQuery(5, new List<List<int>>() { new List<int>{ 1, 2, 10 }, new List<int> { 2, 3, 20 }, new List<int> { 2, 5, 25 } });
         ArrayPrograms3.RainWaterTrap(new List<int>() { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 });
-        ArrayPrograms3.AddOneToNumber(new List<int>() { 0, 3, 7, 6, 4, 0, 5, 5, 5 });
+        ArrayPrograms3.AddOneToNumber(new List<int>() { 0,0, 3, 7, 6, 4, 0, 5, 5, 5 });
 
         _2DArray.ColumnSum(new List<List<int>> { new List<int> { 1, 2, 3, 4 }, new List<int> { 5, 6, 7, 8 }, new List<int> { 9, 2, 3, 4 } });
         _2DArray.RowSum(new List<List<int>> { new List<int> { 1, 2, 3, 4 }, new List<int> { 5, 6, 7, 8 }, new List<int> { 9, 2, 3, 4 } });
         _2DArray.MatrixTranspose(new List<List<int>> { new List<int> { 1, 2, 3 }, new List<int> { 4, 5, 6 }, new List<int> { 7, 8, 9 } });
-
+        _2DArray.MinimumSwaps(new List<int>() { 5, 17, 100, 11 }, 20);
 
         StringProblems.ReverseAString("scaler");
         StringProblems.ToggleTheString("FbxdWdoKwrezJPP");
