@@ -272,5 +272,40 @@ namespace ArraysDSA
             return minimumSwaps;
 
         }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235834/assignment/problems/4091?navref=cl_tt_lst_nm
+        public static int SumOfAllSubMatrices(List<List<int>> A)
+        {
+            int result = 0;
+            //This can be achieved through the contribution technique
+            for (int row = 0; row < A.Count; row++)
+            {
+                for (int col = 0; col < A[0].Count; col++)
+                {
+                    result += A[row][col] * (row +1) *(col +1)*(A.Count - row) * (A[0].Count - col);
+                }
+            }
+
+            return result;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235834/assignment/problems/63?navref=cl_tt_lst_nm
+        public static List<List<int>> GenarateSpiralMatrix(int A)
+        {
+            var result = new int[A,A];
+            int row = 0;
+            int col = 0;
+            int counter = 1;
+            for (int i = 0; i < A - 1; i++)
+            {
+
+            }
+            foreach(var res in result)
+            {
+                var red = res;
+            }
+            return null;
+        }
+
     }
 }

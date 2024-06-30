@@ -382,5 +382,39 @@ namespace ArraysDSA
 
             return A;
         }
+
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235856/assignment/problems/65?navref=cl_tt_lst_nm
+        public static int FirstMissingPositiveInteger(List<int> A)
+        {
+            for(int i=0; i < A.Count; i++)
+            {
+                //This while loop will not run for all n values hence the time complexity is not n2
+                //Here the time complexity is O(N) because: Outer loop will run for N times + while loop will run N times
+                //Because the condition for while loop to run takes care of that.
+                while(A[i] >0 && A[i]<=A.Count && A[i] != i+1)
+                {
+                    //Check for same number to avoid infinite loop
+                    if (A[i] == A[A[i] - 1])
+                    {
+                        break;
+                    }
+                    //Swap if the number is not in the same index (Use +1 /-1 to accomodate the index ranking
+                    var temp = A[i];
+                    A[i] = A[A[i] - 1];
+                    A[temp - 1] = temp;
+                }
+            }
+
+            for (int i=0; i < A.Count; i++)
+            {
+                if(A[i] != i+1)
+                {
+                    return i+1;
+                }
+            }
+
+            return A.Count + 1;
+        }
     }
 }
