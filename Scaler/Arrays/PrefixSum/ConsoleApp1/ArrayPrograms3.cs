@@ -335,7 +335,7 @@ namespace ArraysDSA
                 {
                     break;
                 }
-                
+
             }
             i = 0;
             int j = A.Count - 1;
@@ -343,13 +343,13 @@ namespace ArraysDSA
             while (i < j)
             {
                 var temp = A[i];
-                A[i] = A[j]; 
+                A[i] = A[j];
                 A[j] = temp;
                 i++;
                 j--;
             }
             int carryforward = 1;
-            for(int k = 0; k < A.Count; k++)
+            for (int k = 0; k < A.Count; k++)
             {
                 A[k] = carryforward + A[k];
 
@@ -363,7 +363,7 @@ namespace ArraysDSA
                 }
             }
 
-            if(carryforward != 0)
+            if (carryforward != 0)
             {
                 A.Add(carryforward);
             }
@@ -387,12 +387,12 @@ namespace ArraysDSA
         //https://www.scaler.com/academy/mentee-dashboard/class/235856/assignment/problems/65?navref=cl_tt_lst_nm
         public static int FirstMissingPositiveInteger(List<int> A)
         {
-            for(int i=0; i < A.Count; i++)
+            for (int i = 0; i < A.Count; i++)
             {
                 //This while loop will not run for all n values hence the time complexity is not n2
                 //Here the time complexity is O(N) because: Outer loop will run for N times + while loop will run N times
                 //Because the condition for while loop to run takes care of that.
-                while(A[i] >0 && A[i]<=A.Count && A[i] != i+1)
+                while (A[i] > 0 && A[i] <= A.Count && A[i] != i + 1)
                 {
                     //Check for same number to avoid infinite loop
                     if (A[i] == A[A[i] - 1])
@@ -406,15 +406,76 @@ namespace ArraysDSA
                 }
             }
 
-            for (int i=0; i < A.Count; i++)
+            for (int i = 0; i < A.Count; i++)
             {
-                if(A[i] != i+1)
+                if (A[i] != i + 1)
                 {
-                    return i+1;
+                    return i + 1;
                 }
             }
 
             return A.Count + 1;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235856/assignment/problems/94008?navref=cl_tt_lst_nm
+        public static List<List<int>> MergeSortedOverlappingIntervals(List<List<int>> A)
+        {
+            var result = new List<List<int>>();
+
+            int intervalStart = A[0][0];
+            int intervalEnd = A[0][1];
+
+            for (int i = 1; i < A.Count; i++)
+            {
+                if (A[i][0] <= intervalEnd)
+                {
+                    intervalEnd = Math.Max(intervalEnd, A[i][1]);
+                }
+                else
+                {
+                    result.Add(new List<int>() { intervalStart, intervalEnd });
+                    intervalStart = A[i][0];
+                    intervalEnd = A[i][1];
+                }
+            }
+            result.Add(new List<int>() { intervalStart, intervalEnd });
+
+
+            return result;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235856/assignment/problems/94299?navref=cl_tt_lst_nm
+        public static List<List<int>> MergeIntervalsWithGivenInterval(List<List<int>> A, List<int> B)
+        {
+            var result = new List<List<int>>();
+
+            int newIntervalStart = B[0];
+            int newIntervalEnd = B[1];
+
+            for (int i = 0; i < A.Count; i++)
+            {
+                if (newIntervalStart > A[i][1])
+                {
+                    result.Add(new List<int>() { A[i][0], A[i][1] });
+                }else if(A[i][0] > newIntervalEnd)
+                {
+                    result.Add(new List<int>() { newIntervalStart, newIntervalEnd });
+                    for(int j = i; j < A.Count; j++)
+                    {
+                        result.Add(new List<int>() { A[j][0], A[j][1] });
+                    }
+                    return result;
+                }
+                else
+                {
+                    newIntervalStart = Math.Min(newIntervalStart, A[i][0]);
+                    newIntervalEnd = Math.Max(newIntervalEnd, A[i][1]);
+                }
+
+            }
+            result.Add(new List<int>() { newIntervalStart, newIntervalEnd });
+
+            return result;
         }
     }
 }
