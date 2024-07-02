@@ -292,19 +292,68 @@ namespace ArraysDSA
         //https://www.scaler.com/academy/mentee-dashboard/class/235834/assignment/problems/63?navref=cl_tt_lst_nm
         public static List<List<int>> GenarateSpiralMatrix(int A)
         {
+            var res = new List<List<int>>();
             var result = new int[A,A];
             int row = 0;
             int col = 0;
-            int counter = 1;
-            for (int i = 0; i < A - 1; i++)
+            int counter = 0;
+            int end = A / 2;
+            int endCounter = A;
+            for (int i = 0; i < end; i++)
             {
+                row = i;
+                col = i;
 
+                for(int j = col; j < endCounter-1; j++)
+                {
+                    
+                    result[row,col] = ++counter;
+                    col++;
+                }
+                for (int k = row; k < endCounter-1; k++)
+                {
+                    
+                    result[row, col] = ++counter;
+                    row++;
+                }
+
+                for (int k = col;k>(A-endCounter); k--)
+                {
+                   
+                    result[row, col] = ++counter;
+                    col--;
+                }
+                for (int k = row; k >(A-endCounter); k--)
+                {
+                   
+                    result[row, col] = ++counter;
+                    row--;
+                }
+                endCounter--;
             }
-            foreach(var res in result)
+
+            //For odd length square matrix the middle element will not be filled and you have to handle this case
+            //separately remember it.
+            if (A % 2 == 1)
             {
-                var red = res;
+                result[end, end] = ++counter;
             }
-            return null;
+
+            //There is no easy way to convert from 2d array to a list
+            //so used the for loops to accomodate the return type
+            for (int i = 0; i < result.GetLength(0); ++i)
+            {
+               List<int> list = new List<int>();
+                for(int j = 0; j < result.GetLength(1); j++)
+                {
+                    list.Add(result[i,j]);
+                }
+
+                res.Add(list);
+            }
+
+            return res;
+          
         }
 
     }

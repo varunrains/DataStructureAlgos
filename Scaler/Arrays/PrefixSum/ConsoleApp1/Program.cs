@@ -32,6 +32,7 @@ class Solution
         _2DArray.RowSum(new List<List<int>> { new List<int> { 1, 2, 3, 4 }, new List<int> { 5, 6, 7, 8 }, new List<int> { 9, 2, 3, 4 } });
         _2DArray.MatrixTranspose(new List<List<int>> { new List<int> { 1, 2, 3 }, new List<int> { 4, 5, 6 }, new List<int> { 7, 8, 9 } });
         _2DArray.MinimumSwaps(new List<int>() { 5, 17, 100, 11 }, 20);
+        _2DArray.GenarateSpiralMatrix(5);
 
         StringProblems.ReverseAString("scaler");
         StringProblems.ToggleTheString("FbxdWdoKwrezJPP");
