@@ -306,26 +306,22 @@ namespace ArraysDSA
 
                 for(int j = col; j < endCounter-1; j++)
                 {
-                    
                     result[row,col] = ++counter;
                     col++;
                 }
                 for (int k = row; k < endCounter-1; k++)
                 {
-                    
                     result[row, col] = ++counter;
                     row++;
                 }
 
                 for (int k = col;k>(A-endCounter); k--)
                 {
-                   
                     result[row, col] = ++counter;
                     col--;
                 }
                 for (int k = row; k >(A-endCounter); k--)
                 {
-                   
                     result[row, col] = ++counter;
                     row--;
                 }
