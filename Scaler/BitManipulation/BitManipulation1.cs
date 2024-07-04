@@ -60,6 +60,27 @@ namespace BitManipulation
             if (n == 0) {
                 return A;
             }
+            else
+            {
+                n = (1 << B) ^ A;
+                return n;
+            }
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235832/assignment/problems/4531?navref=cl_tt_lst_nm
+        public static int HelpFromSam(int A)
+        {
+            var minimumNumberOfTimesSamTakesHelp = 0;
+
+            for (int i = 0; i < 32; i++)
+            {
+                if (((1 << i) & A) != 0)
+                {
+                    minimumNumberOfTimesSamTakesHelp++;
+                }
+            }
+
+            return minimumNumberOfTimesSamTakesHelp;
         }
     }
 }

@@ -8,5 +8,6 @@ class Program
         BitManipulation1.ToggleIthBit(4, 1);
         BitManipulation1.CheckBit(4, 1);
         BitManipulation1.UnsetIthBit(5, 2);
+        BitManipulation1.HelpFromSam(4);
     }
 }
