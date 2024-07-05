@@ -82,5 +82,103 @@ namespace BitManipulation
 
             return minimumNumberOfTimesSamTakesHelp;
         }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235830/assignment/problems/193?navref=cl_tt_lst_nm
+        public static int SingleNumber(List<int> A)
+        {
+            //Using XOR operator and using the property A^A = 0 then it can be easily done 
+            int ans = A[0];
+            for (int i = 1; i < A.Count; i++)
+            {
+                ans ^= A[i];
+            }
+
+            return ans;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235830/assignment/problems/195?navref=cl_tt_lst_nm
+        public static int SingleNumberOutOfThree(List<int> A)
+        {
+            //This can be done using the formula Kx + 1
+            //THere could be x of K elements but with one unique element which 
+            //we need to find with linear time complexity
+            int countOfSetBits = 0;
+            int ans = 0;
+            for(int bit  = 0; bit < 32; bit++)
+            {
+                countOfSetBits = 0;
+                for (int i = 0; i < A.Count; i++)
+                {
+                    if ((A[i] & (1 << bit)) != 0)
+                    {
+                        countOfSetBits++;
+                    }
+                }
+                //Based on the 3x formula
+                if(countOfSetBits % 3 == 1)
+                {
+                    ans = ans | (1 << bit);
+                }
+            }
+
+            return ans;
+            
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235830/assignment/problems/9184?navref=cl_tt_lst_nm
+        public static List<int> TwoIntegersOutOfDuplicates(List<int> A)
+        {
+            //Using XOR operator and using the property A^A = 0 then it can be easily done 
+            //for all the elements except the answer as there will be two elements
+            int xor = A[0];
+            for (int i = 1; i < A.Count; i++)
+            {
+                xor ^= A[i];
+            }
+
+            var result = new List<int>();
+            int firstSetBitPosition = 0;
+            //Find the first set bit in the anwser so that we can
+            //bucket it to two separate collection and find out two individual numbers
+            for(int bit = 0;bit < 32; bit++)
+            {
+                if((xor & (1 << bit)) != 0)
+                {
+                    firstSetBitPosition = bit;
+                    break;
+                }
+            }
+            //There will be two unique elements
+            int x = 0;int y= 0;
+            //Now differntiate using the set bit 
+
+            for (int i = 0; i < A.Count; i++)
+            {
+                //Put the numbers which has set bit in one bucket for example [5,1,5]
+                if ((A[i] & (1 << firstSetBitPosition)) != 0)
+                {
+                    x ^= A[i];
+                }
+                //Put the numbers which has not set bit in other bucket for example [6,3,6]
+                //If we do XOR for both the array's we can get the unique element [1,3]
+                else
+                {
+                    y ^= A[i];
+                }
+            }
+            
+            result.Add(x);
+            result.Add(y);
+
+            //Answer was expecting in order so sorted it in ascending
+            return result.OrderBy(x =>x).ToList();
+
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235830/assignment/problems/35182?navref=cl_tt_lst_nm
+        public static List<int> FindTwoMissingNumbers(List<int> A)
+        {
+
+        }
     }
 }
