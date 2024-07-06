@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -178,7 +179,171 @@ namespace BitManipulation
         //https://www.scaler.com/academy/mentee-dashboard/class/235830/assignment/problems/35182?navref=cl_tt_lst_nm
         public static List<int> FindTwoMissingNumbers(List<int> A)
         {
+            //Genarate an array with N+2 values in it
+            var array = new int[A.Count + 2];
+            //fill the array values from 1 to N+2
+            int counter  = 0;
+            int xor_givenArray = 0;
+            int xor_generatedArray = 0;
+            for(int i = 0; i < array.Length; i++)
+            {
+                array[i] =++counter;
+                xor_generatedArray ^= array[i];
+            }
+
+            for(int i=0;i<A.Count; i++)
+            {
+                xor_givenArray ^= A[i];
+            }
+
+            //Now there will be two unique numbers 
+            //Find the first set bit of the result 
+            var xor = xor_generatedArray ^ xor_givenArray;
+            int firstSetBit = 0;
+
+            for (int bit = 0; bit < 32; bit++)
+            {
+                if ((xor & (1 << bit)) != 0)
+                {
+                    firstSetBit =bit;
+                    break;
+                }
+            }
+
+            //Merge the arrays and find the missing numbers
+            var arr = array.Concat(A).ToList();
+            //The missing two numbers
+            int x = 0; int y = 0;
+            for (int i = 0; i < arr.Count; i++)
+            {
+                if ((arr[i]& (1 << firstSetBit)) != 0)
+                {
+                    x ^= arr[i];
+                }
+                else
+                {
+                    y ^= arr[i];
+                }
+            }
+
+            var resultArray = new List<int>
+            {
+                x,
+                y
+            };
+            return resultArray.OrderBy(x => x).ToList();
+
 
         }
+
+
+        //TODO: Solved using help (GPT)
+        //https://www.scaler.com/academy/mentee-dashboard/class/235830/assignment/problems/6604?navref=cl_tt_nv
+        public static int SubArraySumWithOr(List<int> A)
+        {
+            int[] idx = new int[32];
+            long ans = 0;
+            for (int i = 0; i < A.Count; ++i)
+            {
+                long currentValue = A[i];
+                for (int bit = 0; bit < 32; ++bit)
+                {
+                    long pw = 1 << bit;
+                    if ((currentValue & pw) != 0)
+                    { //if jth bit is set
+                        ans += pw * i; // add its contribution in ans for all subarrays ending at index i
+                        idx[bit] = i; // store the index for next elements
+                    }
+                    else if (idx[bit] != 0) // if jth bit is not set
+                    {
+                        ans += pw * idx[bit]; // add its contribution in ans for all subarrays ending at index i using 
+                    } // the information of last element having jth bit set
+                }
+            }
+            return (int)(ans % 1000000007);
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235830/assignment/problems/19558?navref=cl_tt_lst_nm
+        public static int MaximumAndPair(List<int> A)
+        {
+            int count = 0;
+            int ans = 0;
+            for(int bit = 31; bit >= 0; bit--)
+            {
+                count = 0;
+                for(int i=0; i < A.Count; i++)
+                {
+                    if ((A[i] & (1 <<bit)) != 0)
+                    {
+                        count++;
+                    }
+                }
+
+                if (count >= 2)
+                {
+                    ans = ans | 1 << bit;
+
+                    for(int i=0;i<A.Count; i++)
+                    {
+                        if ((A[i] & (1 << bit)) == 0)
+                        {
+                            A[i] = 0;
+                        }
+                    }
+                }
+            }
+
+            return ans;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235832/homework/problems/17892?navref=cl_tt_lst_nm
+        public static long UnsetXBitsFromRight(long A, int B)
+        {
+            for (int bit = 0; bit < B; bit++)
+            {
+                //check if the bit is 1 or 0
+                var res = A & (1 << bit);
+                //if the bit is 1 then un-set it and then assign it to A
+                //By this it will un-set all the B bits
+                if (res != 0)
+                {
+                    A = (A ^ (1 << bit));
+                }
+
+            }
+            return A;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235832/homework/problems/9412?navref=cl_tt_lst_nm
+        //Most questions relates to finding the number of 1's in a given integer
+        //Read the question carefully and see the examples
+        //You will understand the pattern and then you can answer
+        public static int NumberOfGoodDays(int A)
+        {
+            int counter = 0;
+            for(int bit = 0; bit < 32; bit++)
+            {
+                if((A & (1<< bit)) != 0){
+                    counter++;
+                }
+            }
+            return counter;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235832/homework/problems/4105?navref=cl_tt_lst_nm
+        public static int FindMagicNumber(int A)
+        {
+            int ans = 0;
+            for(int bit = 0;bit < 32; bit++)
+            {
+                if((A & (1 << bit)) != 0)
+                {
+                    ans += (int)Math.Pow(5,bit+1);
+                }
+            }
+            return ans;
+        }
+
+
     }
 }

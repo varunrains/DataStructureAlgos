@@ -12,5 +12,8 @@ class Program
         BitManipulation1.SingleNumber(new List<int>() { 1, 2, 2, 3, 1 });
         BitManipulation1.SingleNumberOutOfThree(new List<int>() { 1, 2, 4, 3, 3, 2, 2, 3, 1, 1 });
         BitManipulation1.TwoIntegersOutOfDuplicates(new List<int>() { 1, 2, 3, 1, 2, 4 });
+        BitManipulation1.SubArraySumWithOr(new List<int>() { 1, 2, 3, 4,5});
+        BitManipulation1.UnsetXBitsFromRight(93, 4);
+        BitManipulation1.FindMagicNumber(10);
     }
 }
