@@ -63,5 +63,59 @@ namespace Recursion
             
             return Bar(x, Foo(x,y-1));
         }
+
+        public static void DecAndThenInc(int A)
+        {
+            DecRec(A);
+            IncRec(A);
+            Console.WriteLine();
+        }
+
+        private static void DecRec(int A)
+        {
+            if (A == 0)
+            {
+                return;
+            }
+            Console.Write(A + " ");
+            DecRec(A - 1);
+        }
+
+        private static void IncRec(int A)
+        {
+            if (A == 0)
+            {
+                return;
+            }
+            IncRec(A - 1);
+            Console.Write(A + " ");
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235828/homework/problems/10754?navref=cl_tt_lst_nm
+        public static int SumOfDigits(int A)
+        {
+            int sum = 0;
+            var res = SumOfDigitsRec(A, sum);
+            return res;
+        }
+
+        private static int SumOfDigitsRec(int A, int sum)
+        {
+            if (A == 0)
+            {
+                return sum;
+            }
+            var unitPlace = A % 10;
+            sum += unitPlace;
+
+            //if(A/10 == 0)
+            //{
+            //    sum += A;
+            //}
+
+            return SumOfDigitsRec(A/10,sum);
+           // return sum;
+        }
+
     }
 }

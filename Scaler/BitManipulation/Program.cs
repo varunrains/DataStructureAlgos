@@ -15,5 +15,6 @@ class Program
         BitManipulation1.SubArraySumWithOr(new List<int>() { 1, 2, 3, 4,5});
         BitManipulation1.UnsetXBitsFromRight(93, 4);
         BitManipulation1.FindMagicNumber(10);
+        BitManipulation2.FindMinXorPair(new List<int>() { 4, 13, 6, 7, 10 });
     }
 }

@@ -5,6 +5,7 @@ class Program
     static void Main(string[] args)
     {
         Recursion.Print1toA(9);
-        var ds = Recursion.Foo(3, 5);
+        Recursion.SumOfDigits(46);
+       // var ds = Recursion.Foo(3, 5);
     }
 }
