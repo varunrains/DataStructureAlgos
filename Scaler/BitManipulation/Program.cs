@@ -16,5 +16,6 @@ class Program
         BitManipulation1.UnsetXBitsFromRight(93, 4);
         BitManipulation1.FindMagicNumber(10);
         BitManipulation2.FindMinXorPair(new List<int>() { 4, 13, 6, 7, 10 });
+        BitManipulation2.StrangeEquality(5);
     }
 }

@@ -477,5 +477,51 @@ namespace ArraysDSA
 
             return result;
         }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235836/homework/problems/329/?navref=cl_pb_nv_tb
+        public static List<int> FlipUsingMaximumSubArraySum(string A)
+        {
+            //This problem can be solved by Kadane's algorithm
+            //You just need to find the maximum subarray sum and return the indices in an array
+
+            int L = 0;
+            int R = 0;
+            int l = 0;
+            int currentSum = 0;
+            int maximumSum = int.MinValue;
+            int numberOfOnes = 0;
+            for (int i = 0; i < A.Length; i++)
+            {
+                if (A[i] == '1')
+                {
+                    numberOfOnes++;
+                    currentSum -= 1;
+                }
+                else
+                {
+                    currentSum += 1;
+                    if(maximumSum < currentSum)
+                    {
+                        maximumSum = currentSum;
+                        R = i;
+                        L = l;
+                    }
+                }
+                
+                if (currentSum < 0)
+                {
+                    l = i + 1;
+                    currentSum = 0;
+                }
+
+            }
+            if (numberOfOnes == A.Length)
+            {
+                return new List<int>();
+            }
+            //For 1 based indexing add one
+            return new List<int>() { L+1, R+1 };
+        }
+
     }
 }
