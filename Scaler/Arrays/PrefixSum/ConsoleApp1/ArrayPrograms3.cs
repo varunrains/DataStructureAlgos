@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Pipes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -521,6 +522,20 @@ namespace ArraysDSA
             }
             //For 1 based indexing add one
             return new List<int>() { L+1, R+1 };
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235856/homework/problems/4099/hints?navref=cl_pb_nv_tb
+        public static int NumberOfDigitOnes(int A)
+        {
+            //You need to find out the formula based on the observation
+            //Find formulas for unit place, tens place, hundred place and so on
+            int numberOfOnes = 0;
+            for (int i = 1; i <= A; i *= 10)
+            {
+                numberOfOnes += A/(i*10)*i + Math.Min(Math.Max(A % (i * 10) - i + 1, 0),i);
+            }
+
+            return numberOfOnes;
         }
 
     }
