@@ -538,5 +538,64 @@ namespace ArraysDSA
             return numberOfOnes;
         }
 
+        //https://www.scaler.com/academy/mentee-dashboard/class/235856/homework/problems/71?navref=cl_tt_lst_nm
+        //Tricky question to understand please read the question carefully
+        public static List<int> NextPermuatationInTheList(List<int> A)
+        {
+
+            //for a.count ==2 the logic should be relooked to have a proper logic in place
+            if (A.Count == 1)
+            {
+                return A;
+            }else if(A.Count == 2)
+            {
+                var temp2 = A[1];
+                A[1] = A[0];
+                A[0] = temp2;
+                return A;
+            }
+
+            //find the smallest number from the right which is not greater than its immediate right
+            int i = A.Count - 2;
+            while (i >=0 && A[i] > A[i + 1])
+            {
+                if (i == 0) break;
+                i--;
+                
+            }
+
+            //find the next just largest element from right which is just smaller than A[i]
+            int j = A.Count - 1;
+            while (A[i] > A[j])
+            {
+                j--;
+            }
+
+            //swap i and j
+
+            var temp = A[i];
+            A[i] = A[j];
+            A[j] = temp;
+
+            //Reverse to get the next smallest permutation from the subarray formed between i and end of the array
+            j=A.Count - 1;
+            if (i > 0)
+            {
+                i = i + 1;//start reversing from the next index
+            }
+            while(i < j)
+            {
+                var temp1 = A[i];
+                A[i] = A[j];
+                A[j] = temp1;
+
+                i++;
+                j--;
+            }
+
+            return A;
+
+        }
+
     }
 }
