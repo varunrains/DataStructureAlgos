@@ -44,6 +44,11 @@ class Solution
 
         Scaler1stTest.FindtheMinimumAverageSubArray(new List<int>() { 46,10,15,44,45,29,39,7,50,33,3,7,25,50,5,22,30,23,0 }, 1,22);
         Scaler1stTest.PositiveInRangeWithQQueries(new List<int>() { 1, -1, 0 }, new List<List<int>>() { new List<int> { 0,2 }, new List<int> { 1,2 } });
+
+        Scaler2ndTest.RainWaterTrap(new List<int>() { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 });
+       // Scaler2ndTest.MaxPossibleSumOfAnArray(new List<int>() { 1, 1, 6, 11, 14, 14, 17, 18, 18, 1 });
+        //Scaler2ndTest.MaxPossibleSumOfAnArray(new List<int>() {9,2,4,2 });
+       Scaler2ndTest.MaxPossibleSumOfAnArray(new List<int>() { 4,6,9,11,12,13,16,20,20,6 });
     }
 
 }

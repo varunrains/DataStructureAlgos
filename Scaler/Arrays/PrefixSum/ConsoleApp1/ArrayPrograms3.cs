@@ -579,10 +579,7 @@ namespace ArraysDSA
 
             //Reverse to get the next smallest permutation from the subarray formed between i and end of the array
             j=A.Count - 1;
-            if (i > 0)
-            {
-                i = i + 1;//start reversing from the next index
-            }
+            i = i + 1;//start reversing from the next index
             while(i < j)
             {
                 var temp1 = A[i];
