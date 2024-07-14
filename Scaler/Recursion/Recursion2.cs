@@ -72,6 +72,70 @@ namespace Recursion
             return res;
         }
 
+        //https://www.scaler.com/academy/mentee-dashboard/class/235826/assignment/problems/15010?navref=cl_tt_lst_nm
+        public static List<List<int>> TowerOfHanoi(int A)
+        {
+            var res = new List<List<int>>();
+            TowerOfHanoiRec(A, 1,2,3, res);
+            return res;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235826/homework/problems/122826?navref=cl_tt_lst_nm
+        public static int FirstIndex(List<int> A, int B)
+        {
+            var res = FirstIndexRec(A, B, 0);
+            return res;
+        }
+
+        private static int FirstIndexRec(List<int> A, int B, int len)
+        {
+            if(len== A.Count)
+            {
+                return -1;
+            }
+
+            if (A[len] == B)
+            {
+                return len;
+            }
+
+            return FirstIndexRec(A, B, len+1);
+
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235826/homework/problems/122847?navref=cl_tt_lst_nm
+        public static int FindLastIndex(List<int> A, int B)
+        {
+            var res = FindLastIndexRec(A, B, A.Count-1);
+            return res;
+        }
+
+        private static int FindLastIndexRec(List<int> A, int B, int len)
+        {
+            if(len < 0)
+            {
+                return -1;
+            }
+            if (A[len] == B)
+            {
+                return len;
+            }
+            return FindLastIndexRec(A, B, len - 1);
+        }
+
+        private static void TowerOfHanoiRec(int D, int A, int B, int C, List<List<int>> res)
+        {
+            if(D == 1)
+            {
+                res.Add(new List<int>() {D,A,C});
+                return;
+            }
+
+            TowerOfHanoiRec(D-1,A,C,B,res);
+            res.Add(new List<int>() { D, A, C });
+            TowerOfHanoiRec(D - 1, B, A, C, res);
+        }
+
         private static int MagicNumberRec(int A, int res)
         {
             if(A != 1 && A < 10 && res ==0)
