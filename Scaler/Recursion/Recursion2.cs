@@ -110,6 +110,57 @@ namespace Recursion
             return res;
         }
 
+        //https://www.scaler.com/academy/mentee-dashboard/class/267764/homework/problems/5840?navref=cl_tt_lst_nm
+        // A%M  = B%M
+        public static int GreatestPossiblePositiveInteger(int A, int B)
+        {
+            return Math.Abs(A - B);
+        }
+
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/267764/assignment/problems/9103?navref=cl_tt_lst_nm
+        public static int DeleteOneToGetMaxiumGCD(List<int> A)
+        {
+            var suffixArrayGCD = new int[A.Count];
+            var prefixArrayGCD = new int[A.Count];
+
+            prefixArrayGCD[0] = A[0];
+            for (int i = 1; i < A.Count; i++)
+            {
+                prefixArrayGCD[i] = FindGcdRec(prefixArrayGCD[i - 1], A[i]);
+            }
+
+            suffixArrayGCD[A.Count-1] = A[A.Count-1];
+            for(int i=A.Count-2; i >= 0; i--)
+            {
+                suffixArrayGCD[i] = FindGcdRec(suffixArrayGCD[i+1], A[i]);
+            }
+            int ans = suffixArrayGCD[1]; //let this be the maxium GCD excluding A[0]
+            for(int i=1; i < A.Count-2; i++)
+            {
+                ans = Math.Max(ans, FindGcdRec(prefixArrayGCD[i-1], suffixArrayGCD[i+1]));
+            }
+            ans = Math.Max(ans, prefixArrayGCD[A.Count - 2]);//excluding A[n-1]
+
+            return ans;
+
+        }
+
+        public static int FindGcd(int A, int B)
+        {
+            var res = FindGcdRec(A, B);
+            return res;
+        }
+
+        private static int FindGcdRec(int A, int B)
+        {
+            if(B==0)
+            {
+                return A;
+            }
+            return FindGcdRec(B, A % B);
+        }
+
         private static int FindLastIndexRec(List<int> A, int B, int len)
         {
             if(len < 0)
