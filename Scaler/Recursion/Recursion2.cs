@@ -135,8 +135,8 @@ namespace Recursion
             {
                 suffixArrayGCD[i] = FindGcdRec(suffixArrayGCD[i+1], A[i]);
             }
-            int ans = suffixArrayGCD[1]; //let this be the maxium GCD excluding A[0]
-            for(int i=1; i < A.Count-2; i++)
+            int ans = suffixArrayGCD[1]; //let this be the excluding A[0]
+            for(int i=1; i < A.Count-1; i++)
             {
                 ans = Math.Max(ans, FindGcdRec(prefixArrayGCD[i-1], suffixArrayGCD[i+1]));
             }
@@ -146,6 +146,43 @@ namespace Recursion
 
         }
 
+        //https://www.scaler.com/academy/mentee-dashboard/class/267764/assignment/problems/4745/?navref=cl_pb_nv_tb
+        public static int ModularSum(List<int> A)
+        {
+            //var frequencyArr = new int[1000];
+            Dictionary<int,int> map = new Dictionary<int,int>();
+
+            for (int i = 0; i < A.Count; i++)
+            {
+                if (map.ContainsKey(A[i]))
+                {
+                    map[A[i]]++;
+                }
+                else
+                {
+                    map.Add(A[i], 1);
+                }
+                
+            }
+
+            int ans = 0;
+            int mod = 1000000007;
+            for(int i = 1; i <= 1000; i++)
+            {
+                for(int j=1; j <= 1000; j++)
+                {
+                    var val = i % j;
+                    var val1 = 0;
+                    var val2 = 0;
+                    _ =  map.TryGetValue(i, out val1);
+                    _ = map.TryGetValue(j, out val2);
+                    var temp = val1 * val2 * val;
+                    ans = ((ans % mod) + (temp % mod)) % mod;
+                }
+            }
+
+            return ans;
+        }
         public static int FindGcd(int A, int B)
         {
             var res = FindGcdRec(A, B);
@@ -158,6 +195,7 @@ namespace Recursion
             {
                 return A;
             }
+            //A%B will always be less than B-1, so swap it 
             return FindGcdRec(B, A % B);
         }
 
