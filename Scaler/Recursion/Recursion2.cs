@@ -183,6 +183,29 @@ namespace Recursion
 
             return ans;
         }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/267764/assignment/problems/4110?navref=cl_tt_lst_nm
+        public static int PairSumDivisibleByM(List<int> A, int B)
+        {
+            int ans = 0;
+            Dictionary<int, int> map = new Dictionary<int, int>();
+            for(int i=0; i<A.Count; i++)
+            {
+                int x = (A[i] % B) % 1000000007;
+                int y = (B - x)%B;
+                ans = (ans + map.GetValueOrDefault(y)) % 1000000007;
+                if (map.ContainsKey(x))
+                {
+                    map[x]++;
+                }
+                else
+                {
+                    map.Add(x, 1);
+                }
+            }
+
+            return ans;
+        }
         public static int FindGcd(int A, int B)
         {
             var res = FindGcdRec(A, B);

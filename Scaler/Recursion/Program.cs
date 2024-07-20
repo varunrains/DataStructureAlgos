@@ -12,5 +12,6 @@ class Program
         var dss = Recursion2.DeleteOneToGetMaxiumGCD(new List<int> { 3, 9, 6, 8, 3 });
         // var ds = Recursion.Foo(3, 5);
         var ds2 = Recursion2.ModularSum(new List<int> { 686, 675, 758, 659, 377, 965, 430, 220, 599, 699 } );
+        Recursion2.PairSumDivisibleByM(new List<int> { 1, 2, 3, 4, 5 }, 2);
     }
 }
