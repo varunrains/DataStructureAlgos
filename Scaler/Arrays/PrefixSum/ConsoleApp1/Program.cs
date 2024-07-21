@@ -49,6 +49,8 @@ class Solution
        // Scaler2ndTest.MaxPossibleSumOfAnArray(new List<int>() { 1, 1, 6, 11, 14, 14, 17, 18, 18, 1 });
         //Scaler2ndTest.MaxPossibleSumOfAnArray(new List<int>() {9,2,4,2 });
        Scaler2ndTest.MaxPossibleSumOfAnArray(new List<int>() { 4,6,9,11,12,13,16,20,20,6 });
+
+        Hashing.CommonElements(new List<int> { 19, 19, 3, 5, 6 }, new List<int> { 2, 8, 2, 12, 16, 3 });
     }
 
 }
