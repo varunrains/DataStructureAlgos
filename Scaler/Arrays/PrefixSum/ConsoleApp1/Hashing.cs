@@ -24,7 +24,7 @@ namespace ArraysDSA
                 }
             }
 
-            for(int i=0;i < B.Count; i++)
+            for (int i = 0; i < B.Count; i++)
             {
                 var val = 0;
                 map.TryGetValue(B[i], out val);
@@ -51,7 +51,7 @@ namespace ArraysDSA
         public static int FirstRepeatingElement(List<int> A)
         {
             var hashMap = new Dictionary<int, int>();
-            for(int i=0;i < A.Count; i++)
+            for (int i = 0; i < A.Count; i++)
             {
                 if (hashMap.ContainsKey(A[i]))
                 {
@@ -63,9 +63,9 @@ namespace ArraysDSA
                 }
             }
 
-            for(int i=0;i<A.Count; i++)
+            for (int i = 0; i < A.Count; i++)
             {
-                if (hashMap.ContainsKey(A[i]) && hashMap[A[i]] >1)
+                if (hashMap.ContainsKey(A[i]) && hashMap[A[i]] > 1)
                 {
                     return A[i];
                 }
@@ -84,14 +84,14 @@ namespace ArraysDSA
             var prefixSum = new long[A.Count];
             var hashSet = new HashSet<long>();
             prefixSum[0] = A[0];
-            if(prefixSum[0] == 0)
+            if (prefixSum[0] == 0)
             {
                 return 1;
             }
             hashSet.Add(prefixSum[0]);
             for (int i = 1; i < A.Count; i++)
             {
-                prefixSum[i] = prefixSum[i-1] + A[i];
+                prefixSum[i] = prefixSum[i - 1] + A[i];
 
                 //In any step if there is a zero then the subarray sum will be zero return
                 if (prefixSum[i] == 0)
@@ -101,7 +101,7 @@ namespace ArraysDSA
                 hashSet.Add(prefixSum[i]);
             }
 
-            if(hashSet.Count == A.Count)
+            if (hashSet.Count == A.Count)
             {
                 return 0;
             }
@@ -117,7 +117,7 @@ namespace ArraysDSA
             var hasmap1 = new Dictionary<int, int>();
             var hasmap2 = new Dictionary<int, int>();
             var res = new List<int>();
-            for(int i=0; i<A.Count; i++)
+            for (int i = 0; i < A.Count; i++)
             {
                 if (hasmap1.ContainsKey(A[i]))
                 {
@@ -125,11 +125,11 @@ namespace ArraysDSA
                 }
                 else
                 {
-                    hasmap1.Add(A[i],1);
+                    hasmap1.Add(A[i], 1);
                 }
             }
 
-            for(int i=0;i<B.Count ; i++)
+            for (int i = 0; i < B.Count; i++)
             {
                 if (hasmap2.ContainsKey(B[i]))
                 {
@@ -137,7 +137,7 @@ namespace ArraysDSA
                 }
                 else
                 {
-                    hasmap2.Add(B[i],1);
+                    hasmap2.Add(B[i], 1);
                 }
             }
 
@@ -149,8 +149,6 @@ namespace ArraysDSA
                     if (hasmap2[hash.Key] == hasmap1[hash.Key])
                     {
                         valueToRepeat = hasmap1[hash.Key];
-
-
                     }
                     else
                     {
@@ -159,9 +157,53 @@ namespace ArraysDSA
                     var temp = Enumerable.Range(0, valueToRepeat).Select(x => hash.Key);
                     res.AddRange(temp);
                 }
-
             }
             return res;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235844/homework/problems/27543?navref=cl_tt_lst_nm
+        public static int CountUniqueElementsContainingDuplicates(List<int> A)
+        {
+            var hashMap = new Dictionary<int, int>();
+            for (int i = 0; i < A.Count; i++)
+            {
+                if (hashMap.ContainsKey(A[i]))
+                {
+                    hashMap[A[i]]++;
+                }
+                else
+                {
+                    hashMap.Add(A[i], 1);
+                }
+            }
+
+            int countOfUniqueElements = 0;
+            foreach (var item in hashMap)
+            {
+                if(item.Value == 1)
+                {
+                    countOfUniqueElements++;
+                }
+            }
+
+            return countOfUniqueElements;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235844/homework/problems/27776?navref=cl_tt_lst_nm
+        public static int NumberOfSubArraysWithSumZero(List<int> A)
+        {
+            int subArraysWithSumZero = 0;
+            int l = 0;
+            int r = 0;
+            int sum = 0;
+            while (l <= r && r < A.Count)
+            {
+                if (A[l] == 0)
+                {
+                    subArraysWithSumZero++;
+                }
+                sum+= A[l];
+            }
         }
     }
 }
