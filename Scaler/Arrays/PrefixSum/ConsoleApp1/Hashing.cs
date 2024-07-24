@@ -204,6 +204,62 @@ namespace ArraysDSA
                 }
                 sum+= A[l];
             }
+            //Needs work
+            return 0;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235922/assignment/problems/21202?navref=cl_tt_lst_sl
+        public static int PairSum(int A, List<int> B)
+        {
+            var hashSet = new HashSet<int>();
+            for (int i = 0; i < B.Count; i++)
+            {
+                var j = A - B[i];
+
+                if (hashSet.Contains(j))
+                {
+                    return 1;
+                }
+                else
+                {
+                    hashSet.Add(B[i]);
+                }
+            }
+
+            return 0;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235922/assignment/problems/27741?navref=cl_tt_nv
+        public static int CountPairDifference(List<int> A, int B)
+        {
+            var hashMap = new Dictionary<int, int>();
+            var modValue = 1000000007;
+            var pairCount = 0;
+            for(int i = 0;i< A.Count; i++)
+            {
+                var j =  A[i] - B;
+                var j1 = A[i] + B;
+                if (hashMap.ContainsKey(j))
+                {
+                    pairCount += hashMap[j];
+                    //hashMap[j]++;
+                }
+                else if (hashMap.ContainsKey(j1))
+                {
+                    pairCount += hashMap[j1];
+                }
+
+                if (hashMap.ContainsKey(A[i]))
+                {
+                    hashMap[A[i]]++;
+                }
+                else
+                {
+                    hashMap.Add(A[i], 1);
+                }
+            }
+
+            return pairCount;
         }
     }
 }
