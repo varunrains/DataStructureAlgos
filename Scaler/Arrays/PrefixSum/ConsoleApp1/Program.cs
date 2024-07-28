@@ -51,6 +51,7 @@ class Solution
        Scaler2ndTest.MaxPossibleSumOfAnArray(new List<int>() { 4,6,9,11,12,13,16,20,20,6 });
 
         Hashing.CommonElements(new List<int> { 19, 19, 3, 5, 6 }, new List<int> { 2, 8, 2, 12, 16, 3 });
+        Hashing.LongestSubArrayZeroSum(new List<int>() { 9, -20, -11, -8, -4, 2, -12, 14, 1});
     }
 
 }

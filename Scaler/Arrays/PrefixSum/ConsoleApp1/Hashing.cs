@@ -242,9 +242,8 @@ namespace ArraysDSA
                 if (hashMap.ContainsKey(j))
                 {
                     pairCount += hashMap[j];
-                    //hashMap[j]++;
                 }
-                else if (hashMap.ContainsKey(j1))
+                if (hashMap.ContainsKey(j1))
                 {
                     pairCount += hashMap[j1];
                 }
@@ -258,8 +257,159 @@ namespace ArraysDSA
                     hashMap.Add(A[i], 1);
                 }
             }
-
             return pairCount;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235922/assignment/problems/4827?navref=cl_tt_lst_nm
+        public static int SubArraySumWithK(List<int> A, int B)
+        {
+            var hashMap = new Dictionary<int, int>();
+            var  p  = 0;
+            var count = 0;
+            //To handle cases where subarray is the 0th element itself and only contains one element
+            //as sum - B = 0 so add 0 as 0 exists 1 times
+            hashMap.Add(0, 1);
+
+            for (int i=0;i< A.Count; i++)
+            {
+                p += A[i];
+                int val2 = 0;
+                //if (p == B)
+                //{
+                //    _ = hashMap.TryGetValue(p, out val);
+                //    count += val;
+                //}
+                if (hashMap.ContainsKey(p - B))
+                {
+                    _ = hashMap.TryGetValue((p - B), out val2);
+                    count += val2;
+                }
+                if (hashMap.ContainsKey(p))
+                {
+                    hashMap[p]++;
+                }
+                else
+                {
+                    hashMap.Add(p, 1);
+                }
+            }
+            return count;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235922/assignment/problems/333?navref=cl_tt_lst_nm
+        public static List<int> DistinctNumbersInWindow(List<int> A, int B)
+        {
+            if (B > A.Count)
+            {
+                return new List<int>();
+            }
+
+            var hashMap = new Dictionary<int, int>();
+            var res = new List<int>();
+            for(int i = 0; i < B; i++)
+            {
+                if (hashMap.ContainsKey(A[i]))
+                {
+                    hashMap[A[i]]++;
+                }
+                else
+                {
+                    hashMap.Add((int)A[i], 1);
+                }
+            }
+            res.Add(hashMap.Count);
+            for(int i=B; i<A.Count; i++)
+            {
+                var l = i-B;
+                var r = i;
+                //For adding to the window
+                if (hashMap.ContainsKey(A[r]))
+                {
+                    hashMap[A[r]]++;
+                }
+                else
+                {
+                    hashMap.Add(A[r], 1);
+                }
+
+                //For removing from the window
+                if (hashMap.ContainsKey(A[l]))
+                {
+                    var val = --hashMap[A[l]];
+                    if(val == 0)
+                    {
+                        hashMap.Remove(A[l]);
+                    }
+
+                }
+                res.Add(hashMap.Count);
+            }
+            return res;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235922/assignment/problems/27742?navref=cl_tt_lst_nm
+        public static int LongestSubArrayZeroSum(List<int> A)
+        {
+            var counter = 0;
+            long longestLength = 0;
+            var prefixSum = new long[A.Count];
+            var hashMap = new Dictionary<long, int>();
+            prefixSum[0] = A[0];
+            for(int i=1; i<A.Count; i++)
+            {
+                prefixSum[i] = prefixSum[i - 1] + A[i];
+                counter++;
+                if (prefixSum[i] == 0)
+                {
+                    longestLength = Math.Max(longestLength, i  + 1);
+                    //counter = 0;
+                    //Remember its a sub array sum no need to save the value
+                    //as you might get the same number now or at the end both will eventually form the subarray sum
+                    //hence commented the storing the index part which resulted in success.
+                }
+               else if (hashMap.ContainsKey(prefixSum[i])){
+                    longestLength = Math.Max(longestLength, i- hashMap[prefixSum[i]]);
+                   // hashMap[prefixSum[i]] = i;
+                }
+                else
+                {
+                    hashMap.Add(prefixSum[i], i);
+                }
+            }
+
+            return (int)longestLength;
+        }
+
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235922/homework/problems/27714?navref=cl_tt_lst_nm
+        public static int PairSumCount(List<int> A, int B)
+        {
+            var mod = 1000000009;
+            var hashMap = new Dictionary<int, int>();
+            int count = 0;
+            for (int i = 0; i < A.Count; i++)
+            {
+
+                if (hashMap.ContainsKey(B - A[i]))
+                {
+                    count =( count % mod + hashMap[B - A[i]] % mod)%mod;
+                   // hashMap[B - A[i]]++;
+
+                }
+
+                if(hashMap.ContainsKey(A[i]))
+                {
+                    hashMap[A[i]]++;
+                }
+                else
+                {
+                    hashMap.TryAdd(A[i], 1);
+                }
+               
+
+            }
+
+            return count %mod;
         }
     }
 }
