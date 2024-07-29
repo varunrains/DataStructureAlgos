@@ -257,7 +257,7 @@ namespace ArraysDSA
                     hashMap.Add(A[i], 1);
                 }
             }
-            return pairCount;
+            return pairCount % modValue;
         }
 
         //https://www.scaler.com/academy/mentee-dashboard/class/235922/assignment/problems/4827?navref=cl_tt_lst_nm
