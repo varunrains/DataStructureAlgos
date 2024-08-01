@@ -296,6 +296,65 @@ namespace ArraysDSA
             return count;
         }
 
+        //https://www.scaler.com/academy/mentee-dashboard/class/235844/homework/problems/27776?navref=cl_tt_lst_nm
+        public static int SubArraySumWithZeroCount(List<int> A)
+        {
+            var hashMap = new Dictionary<int, int>();
+            //var prefixSum = new int[A.Count];
+            var count = 0;
+            int sum = 0;
+           // prefixSum[0] = A[0];
+
+            //if (prefixSum[0] == 0 && A.Count == 1) return 1;
+
+            //To handle cases where subarray is the 0th element itself and only contains one element
+            //as sum - B = 0 so add 0 as 0 exists 1 times
+            hashMap.Add(0, 1);
+
+            for (int i=0;i< A.Count; i++)
+            {
+               
+                sum += A[i];
+                //if(prefixSum[i] == 0)
+                //{
+                //    count += hashMap[prefixSum[i]];
+                //    hashMap[prefixSum[i]]++;
+                //}
+
+                if (hashMap.ContainsKey(sum))
+                {
+                    count += hashMap[sum];
+                    hashMap[sum]++;
+                }
+                else
+                {
+                    hashMap.Add(sum, 1);
+                }
+
+            }
+            return count;
+
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235922/homework/problems/4116/hints?navref=cl_pb_nv_tb
+        public static List<int> SubArrayWithGivenSum(List<int> A, int B) 
+        {
+            int i = 0;
+            int j = 0;
+            var res = new List<int>();
+            int sum = 0;
+            while (i < j)
+            {
+                sum += A[i];
+                if(sum == B) res.Add(A[i]);
+                else
+                {
+
+                }
+            }
+            return null;
+        }
+
         //https://www.scaler.com/academy/mentee-dashboard/class/235922/assignment/problems/333?navref=cl_tt_lst_nm
         public static List<int> DistinctNumbersInWindow(List<int> A, int B)
         {
