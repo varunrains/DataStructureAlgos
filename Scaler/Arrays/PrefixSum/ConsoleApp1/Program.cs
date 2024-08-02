@@ -52,6 +52,10 @@ class Solution
 
         Hashing.CommonElements(new List<int> { 19, 19, 3, 5, 6 }, new List<int> { 2, 8, 2, 12, 16, 3 });
         Hashing.LongestSubArrayZeroSum(new List<int>() { 9, -20, -11, -8, -4, 2, -12, 14, 1});
+
+        //QuickSortWithComparator.FactorsSort(new List<int> { 36, 13, 13, 26, 37, 28, 27, 43, 7 });
+        QuickSortWithComparator.FactorsSort(new List<int> { 36, 13, 13 });
+        QuickSortWithComparator.FactorsSortUsingInbuilt(new List<int> { 36, 13, 13, 26, 37, 28, 27, 43, 7 });
     }
 
 }
