@@ -24,6 +24,23 @@ namespace ArraysDSA
             return res.ToString();
         }
 
+        //https://www.scaler.com/academy/mentee-dashboard/class/235854/assignment/problems/167?navref=cl_tt_lst_nm
+        private static void NumberSort(List<int> A, int L, int R)
+        {
+            if (L >= R) return;
+            var pivot = PartitionIndexForIntegers(A, L, R);
+            NumberSort(A, L, pivot - 1);
+            NumberSort(A, pivot + 1, R);
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235854/assignment/problems/4194?navref=cl_tt_nv
+        private static List<List<int>> ClosestPointsToOrigin(List<List<int>> A, int B)
+        {
+            var comparer = new CompararerForPointOrigin();
+            A.Sort(comparer);
+            return A.Take(B).ToList();
+        }
+
 
         //https://www.scaler.com/academy/mentee-dashboard/class/235854/assignment/problems/27473?navref=cl_tt_lst_nm
         public static List<int> FactorsSort(List<int> A)
@@ -53,7 +70,36 @@ namespace ArraysDSA
             return res;
         }
 
+        private static int PartitionIndexForIntegers(List<int> A, int L, int R)
+        {
+            var pivot = L;
+            L = L + 1;
 
+            while (L <= R)
+            {
+                if (A[L] < A[pivot])
+                {
+                    L++;
+                }
+                else if (A[R] > A[pivot])
+                {
+                    R--;
+                }
+                else
+                {
+                    var temp = A[L]; A[L] = A[R]; A[R] = temp;
+                    L++;
+                    R--;
+                }
+            }
+
+            var temp1 = A[pivot];
+            A[pivot] = A[R];
+            A[R] = temp1;
+            return R;
+
+        }
+        //This was not working
         private static int PartitionIndex(List<int> A, int L, int R)
         {
             var pivot = L;
@@ -132,6 +178,27 @@ namespace ArraysDSA
 
     }
 
+    public class CompararerForPointOrigin : System.Collections.Generic.IComparer<List<int>>
+    {
+        public int Compare(List<int> A, List<int> B)
+        {
+            var x = A[0] * A[0] + A[1] * A[1];
+            var y = B[0] * B[0] + B[1] * B[1];
+
+            return x - y;
+        }
+
+    }
+
+    public class CompararerInteger  : System.Collections.Generic.IComparer<int>
+    {
+        public int Compare(int a, int b)
+        {
+            return a - b;
+        }
+
+    }
+
     public class CompararerForFactors : System.Collections.Generic.IComparer<int>
     {
         public int Compare(int a, int b)
@@ -151,6 +218,7 @@ namespace ArraysDSA
             }
         }
 
+        //Optimized way of finding factors as the normal method was giving TLE error
         private static int NumberOfFactors(int A)
         {
             int res = 0;
