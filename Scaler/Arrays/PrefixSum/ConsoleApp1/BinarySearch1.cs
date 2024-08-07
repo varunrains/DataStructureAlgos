@@ -168,6 +168,96 @@ namespace ArraysDSA
             return res;
         }
 
+        private static int SquareRootOfANumber(int A)
+        {
+            int L = 1;
+            int R = A;
+            long mid = 0;
+            while(L <= R)
+            {
+                mid = L + (R-L)/2;
+                if ((mid * mid) <= A && (mid + 1) * (mid + 1) > A)
+                {
+                    return (int)mid;
+                }
+                else if (mid * mid > A)
+                {
+                    R = (int)mid - 1;
+                }
+                else
+                {
+                    L = (int)mid + 1;
+                }
+            }
+
+            return (int)mid;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/235860/assignment/problems/203?navref=cl_tt_lst_nm
+        public static int RotatedSortedArraySearch(List<int> A, int B)
+        {
+            //BInary search steps
+            //1 - Define the search space
+            //2 - Find the mid element if the target
+            //3 - If the mid is not the target then decide to move left or right
+           
+            int L = 0;
+            int R = A.Count - 1;
+
+            int mid = 0;
+
+            while (L <= R)
+            {
+                mid = (L + R) / 2;
+                if (A[mid] == B)
+                {
+                    return mid;
+                }
+
+                if (B >= A[0]) //Search in part 1 of a sorted array
+                {
+                    //Check where is mid
+                    if (A[mid] > A[0]) //part 1 then apply binary search
+                    {
+                        if (A[mid] > B)
+                        {
+                            R = mid - 1;
+                        }
+                        else
+                        {
+                            L = mid + 1;
+                        }
+                    }
+                    else
+                    {  
+                        R = mid - 1; //Pull the search space to part 1;
+                    }
+                }
+                else //Search in the part 2 of the sorted array
+                {
+                    //Check if the mid is in part 2 itself to apply binary search
+                    if (A[mid] < A[0])
+                    {
+                        if (A[mid] > B)
+                        {
+                            R = mid - 1;
+                        }
+                        else
+                        {
+                            L = mid + 1;
+                        }
+                    }
+                    else
+                    {
+                        L = mid + 1; // pull the search space to part 2
+                    }
+                }
+            }
+
+            return -1;
+
+        }
+
         private static int FindRightMostOccurence(List<int> A, int B)
         {
             int L = 0;

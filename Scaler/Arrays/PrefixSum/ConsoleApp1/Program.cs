@@ -58,6 +58,7 @@ class Solution
         QuickSortWithComparator.FactorsSortUsingInbuilt(new List<int> { 36, 13, 13, 26, 37, 28, 27, 43, 7 });
 
         BinarySearch1.SingleElementInSortedArray(new List<int> { 1, 1, 7, 7, 8,9,9 });
+        BinarySearch1.RotatedSortedArraySearch(new List<int> { 1, 7, 67, 133, 178 }, 1);
     }
 
 }
