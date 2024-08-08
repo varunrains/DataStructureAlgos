@@ -258,6 +258,51 @@ namespace ArraysDSA
 
         }
 
+        //https://www.scaler.com/academy/mentee-dashboard/class/235860/assignment/problems/5697?navref=cl_tt_lst_nm
+        public static int AthMagicalNumber(int A, int B, int C)
+        {
+            int mod = 1000000007;
+            long L = Math.Min(B, C);
+            long R = (long)A * L;
+            long LCM = (long)(B / FindGcdRec(B, C)) * C;  // Use long to avoid overflow
+            long mid = 0;
+            while (L <= R)
+            {
+                mid = L + (R - L) / 2;
+                var count = (mid / B) + (mid / C) - (mid / LCM);
+                if (count == A)
+                {
+                    // Check if mid is exactly the A-th magical number
+                    if (mid % B == 0 || mid % C == 0)
+                    {
+                        return (int)(mid % mod);
+                    }
+                    R = mid - 1; // Continue searching in the left half
+                }
+                else if (count < A)
+                {
+                    L = mid + 1;
+                }
+                else
+                {
+                    R = mid - 1;
+                }
+            }
+
+           return (int)(L % mod);
+        }
+
+        private static int FindGcdRec(int A, int B)
+        {
+            if (B == 0)
+            {
+                return A;
+            }
+            //A%B will always be less than B-1, so swap it 
+            return FindGcdRec(B, A % B);
+        }
+
+
         private static int FindRightMostOccurence(List<int> A, int B)
         {
             int L = 0;
