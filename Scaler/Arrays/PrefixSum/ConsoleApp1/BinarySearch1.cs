@@ -292,6 +292,104 @@ namespace ArraysDSA
            return (int)(L % mod);
         }
 
+        //https://www.scaler.com/academy/mentee-dashboard/class/235860/assignment/problems
+        public static int MedianOfAnArray(List<int> A)
+        {
+            int L = A[0]; //min from array
+            int R = A[0]; //max from array
+            for(int i = 1; i < A.Count; i++)
+            {
+                L = Math.Min(L, A[i-1]);
+                R = Math.Max(R, A[i - 1]);
+            }
+
+            var half = (A.Count + 1) / 2;
+            while(L <= R)
+            {
+                var mid = L + (R - L) / 2;
+                int count = CountOfElements(A, mid);
+                int lessCounter = CountOfElements(A, mid - 1);
+                if(count == half && lessCounter < half)
+                {
+                    return mid;
+                }
+                if(count < half)
+                {
+                    L = mid + 1;
+                }
+                else
+                {
+                    R= mid - 1;
+                }
+
+            }
+
+            return 0;
+        }
+
+        // //https://www.scaler.com/academy/mentee-dashboard/class/235860/assignment/problems
+        //This solution was copied from ChatGPT
+        //Go through it one more time
+        public static double MedianOfTwoSortedArray(List<int> A, List<int> B)
+        {
+            if (A.Count > B.Count)
+            {
+                return MedianOfTwoSortedArray(B, A);
+            }
+
+            int m = A.Count;
+            int n = B.Count;
+
+            int low = 0, high = m;
+            while (low <= high)
+            {
+                int partitionA = (low + high) / 2;
+                int partitionB = (m + n + 1) / 2 - partitionA;
+
+                int maxLeftA = (partitionA == 0) ? int.MinValue : A[partitionA - 1];
+                int minRightA = (partitionA == m) ? int.MaxValue : A[partitionA];
+
+                int maxLeftB = (partitionB == 0) ? int.MinValue : B[partitionB - 1];
+                int minRightB = (partitionB == n) ? int.MaxValue : B[partitionB];
+
+                if (maxLeftA <= minRightB && maxLeftB <= minRightA)
+                {
+                    if ((m + n) % 2 == 0)
+                    {
+                        return (Math.Max(maxLeftA, maxLeftB) + Math.Min(minRightA, minRightB)) / 2.0;
+                    }
+                    else
+                    {
+                        return Math.Max(maxLeftA, maxLeftB);
+                    }
+                }
+                else if (maxLeftA > minRightB)
+                {
+                    high = partitionA - 1;
+                }
+                else
+                {
+                    low = partitionA + 1;
+                }
+            }
+
+            throw new ArgumentException("Input arrays are not sorted.");
+        }
+
+        private static int CountOfElements(List<int> A, int B)
+        {
+            int counter = 0;
+            for (int i = 0; i < A.Count; i++)
+            {
+                if (A[i] < B)
+                {
+                    counter++;
+                }
+            }
+
+            return counter;
+        }
+
         private static int FindGcdRec(int A, int B)
         {
             if (B == 0)
