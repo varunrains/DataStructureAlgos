@@ -339,20 +339,50 @@ namespace ArraysDSA
         //https://www.scaler.com/academy/mentee-dashboard/class/235922/homework/problems/4116/hints?navref=cl_pb_nv_tb
         public static List<int> SubArrayWithGivenSum(List<int> A, int B) 
         {
-            int i = 0;
-            int j = 0;
+            var hashMap = new Dictionary<int, int>();
             var res = new List<int>();
-            int sum = 0;
-            while (i < j)
+            var p = 0;
+            var count = 0;
+            //To handle cases where subarray is the 0th element itself and only contains one element
+            //as sum - B = 0 so add 0 as 0 exists 1 times
+            hashMap.Add(0, 1);
+            int destinationIndex = 0;
+            for (int i = 0; i < A.Count; i++)
             {
-                sum += A[i];
-                if(sum == B) res.Add(A[i]);
+                p += A[i];
+                if (hashMap.ContainsKey(p - B))
+                {
+                    destinationIndex = i;
+                    break;
+                }
+                if (hashMap.ContainsKey(p))
+                {
+                    hashMap[p]++;
+                }
                 else
                 {
-
+                    hashMap.Add(p, 1);
                 }
             }
-            return null;
+
+            if(destinationIndex == 0)
+            {
+                return new List<int>() { -1};
+            }
+            int sub_sum = 0;
+            for (int i = destinationIndex; i >= 0; i--)
+            {
+                res.Add(A[i]);
+                sub_sum += A[i];
+
+                if(sub_sum == B)
+                {
+                     res.Reverse();
+                    return res;
+                }
+            }
+            return new List<int>() { -1 };
+
         }
 
         //https://www.scaler.com/academy/mentee-dashboard/class/235922/assignment/problems/333?navref=cl_tt_lst_nm
