@@ -59,6 +59,8 @@ class Solution
 
         BinarySearch1.SingleElementInSortedArray(new List<int> { 1, 1, 7, 7, 8,9,9 });
         BinarySearch1.RotatedSortedArraySearch(new List<int> { 1, 7, 67, 133, 178 }, 1);
+
+        BinarySearch2.PainterPartion(4, 10, new List<int>() { 884, 228, 442, 889 });
     }
 
 }
