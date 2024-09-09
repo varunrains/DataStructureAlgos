@@ -16,6 +16,11 @@ namespace ArraysDSA
             return A;
         }
 
+        public static List<string> IncreasingOrderDiff(List<string> A)
+        {
+            return A.OrderBy(x => x.Length).ToList();
+        }
+
         public static int CheckIfStringCanBeConvertedToPalidrome(string A)
         {
             var hashMap = new Dictionary<string, int>();
@@ -85,6 +90,55 @@ namespace ArraysDSA
 
         }
 
+        public static int CheckIfStringCanBeConvertedToPalindromeAfterMultipleSwaps(string A)
+        {
+            var hashMap = new Dictionary<char, int>();
+
+            foreach (var str in A)
+            {
+
+                if (hashMap.ContainsKey(str))
+                {
+                    hashMap[str]++;
+                }
+                else
+                {
+                    hashMap[str] = 1;
+                }
+            }
+
+            var isOddLength = A.Length % 2 == 1;
+            var alreadyOneOdd = false;
+            foreach (var hash in hashMap)
+            {
+                //one odd number count is allowed
+                if (isOddLength)
+                {
+                    var isOdd = hash.Value % 2 == 1;
+                    if (isOdd && !alreadyOneOdd)
+                    {
+                        alreadyOneOdd = true;
+                    }
+                    //No more than 1 odd is allowed as it is even string
+                    else if(isOdd && alreadyOneOdd)
+                    {
+                        return 0;
+                    }
+                }
+                else
+                {
+                    var isOdd = hash.Value % 2 == 1;
+                    if (isOdd)
+                    {
+                        return 0;
+                    }
+                }
+
+            }
+
+            return 1;
+        }
+
         //public static string LargestNumber(List<int> A)
         //{
 
@@ -98,11 +152,15 @@ namespace ArraysDSA
                 var a = x.Length;
                 var b = y.Length;
 
-
+                if (a == b)
+                {
+                    return 1;
+                }
 
                 return a - b;
 
             }
+
         }
 
 

@@ -71,6 +71,23 @@ namespace Recursion
             Console.WriteLine();
         }
 
+        public static int BarTest(int x,int y)
+        {
+            if(y == 0)
+                return 0;
+            return x + BarTest(x, y-1);
+        }
+
+        public static int FooTest(int x, int y)
+        {
+            if(y == 0)
+            {
+                return 1;
+
+            }
+            return BarTest(x , FooTest(x,y-1));
+        }
+
         private static void DecRec(int A)
         {
             if (A == 0)
@@ -116,6 +133,8 @@ namespace Recursion
             return SumOfDigitsRec(A/10,sum);
            // return sum;
         }
+
+
 
     }
 }

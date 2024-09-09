@@ -48,7 +48,8 @@ class Solution
         Scaler2ndTest.RainWaterTrap(new List<int>() { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 });
        // Scaler2ndTest.MaxPossibleSumOfAnArray(new List<int>() { 1, 1, 6, 11, 14, 14, 17, 18, 18, 1 });
         //Scaler2ndTest.MaxPossibleSumOfAnArray(new List<int>() {9,2,4,2 });
-       Scaler2ndTest.MaxPossibleSumOfAnArray(new List<int>() { 4,6,9,11,12,13,16,20,20,6 });
+        Scaler2ndTest.MaxPossibleSumOfAnArray(new List<int>() { 4,6,9,11,12,13,16,20,20,6 });
+        Scaler3rdTest.CheckIfStringCanBeConvertedToPalindromeAfterMultipleSwaps("swxslszkzygsrawregxcefnlvyfkyxysntxacvsts");
 
         Hashing.CommonElements(new List<int> { 19, 19, 3, 5, 6 }, new List<int> { 2, 8, 2, 12, 16, 3 });
         Hashing.LongestSubArrayZeroSum(new List<int>() { 9, -20, -11, -8, -4, 2, -12, 14, 1});
