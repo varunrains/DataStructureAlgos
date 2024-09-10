@@ -14,7 +14,17 @@ namespace ArraysDSA
         public ListNode? next;
         public ListNode(int x) { val = x; next = null; }
     }
+
+
+    
+  //Definition for singly-linked list with a random pointer.
+  public class RandomListNode {
+      public int label;
+      public RandomListNode? next, random;
+      public RandomListNode(int x) { label = x; }
+  }
  
+
     internal class LinkedList
     {
         //https://www.scaler.com/academy/mentee-dashboard/class/236106/assignment/problems/30536
@@ -100,6 +110,48 @@ namespace ArraysDSA
             }
             A = prev;
             return A;
+
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/236106/assignment/problems/159?navref=cl_tt_lst_nm
+        public RandomListNode CopyRandomListNode(RandomListNode head)
+        {
+            var temp = head;
+
+            //clone the linked list without extra space
+            while (temp != null)
+            {
+                var cn = new RandomListNode(temp.label);
+                cn.next = temp.next;
+                temp.next = cn;
+                temp = temp?.next?.next;
+            }
+
+            temp = head;
+            //set the random pointers of the copied node
+            while(temp!= null)
+            {
+                temp.next.random = temp?.random?.next;
+                temp = temp?.next?.next;
+            }
+
+            //separate original and copied linked list
+            RandomListNode chead = head.next;
+
+            RandomListNode t1 = head, t2 = chead;
+
+            while(t2.next != null)
+            {
+                t1.next = t1.next.next;
+                t2.next = t2.next.next;
+                t1 = t1.next;
+                t2 = t2.next;
+            }
+
+            t1.next = null;
+            t2.next = null;
+
+            return chead;
 
         }
     }

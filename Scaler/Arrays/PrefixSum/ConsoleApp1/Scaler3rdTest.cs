@@ -1,9 +1,13 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
+using static ArraysDSA.Scaler3rdTest;
 
 namespace ArraysDSA
 {
@@ -152,15 +156,12 @@ namespace ArraysDSA
                 var a = x.Length;
                 var b = y.Length;
 
-                if (a == b)
-                {
-                    return 1;
-                }
-
+                //When a -b is 0, the array might still get reordered internally
+                //    because this method doesn’t explicitly maintain the original order for strings of the same length.
+                //Instead, you should use the CompareTo method, which ensures a safe and clear comparison.
+                //    Here's the correct implementation:
                 return a - b;
-
             }
-
         }
 
 
