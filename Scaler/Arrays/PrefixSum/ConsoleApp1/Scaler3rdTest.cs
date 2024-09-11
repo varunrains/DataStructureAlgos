@@ -72,6 +72,24 @@ namespace ArraysDSA
             return A.Take(B).ToList();
         }
 
+
+        public static int StrictilyIncreasingByRemovingOneElement(List<int> A)
+        {
+            int count = 0;
+            int i = 0;
+            int j = A.Count - 1;
+
+            while (i < j)
+            {
+                if (A[i] > A[j])
+                {
+                    count++;
+                    i++;
+                    j++;
+                }
+            }
+        }
+
         public static int PairSum(int A, List<int> B)
         {
             var hashSet = new HashSet<int>();
