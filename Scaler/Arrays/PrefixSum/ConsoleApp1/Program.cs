@@ -62,6 +62,9 @@ class Solution
         BinarySearch1.RotatedSortedArraySearch(new List<int> { 1, 7, 67, 133, 178 }, 1);
 
         BinarySearch2.PainterPartion(4, 10, new List<int>() { 884, 228, 442, 889 });
+
+        Stacks.EvalReversePolishNotation(new List<string>() { "2", "2", "/" });
+        Stacks.BalancedParenthesis("{([])}");
     }
 
 }

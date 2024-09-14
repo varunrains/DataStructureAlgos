@@ -88,6 +88,8 @@ namespace ArraysDSA
                     j++;
                 }
             }
+
+            return 0;
         }
 
         public static int PairSum(int A, List<int> B)
