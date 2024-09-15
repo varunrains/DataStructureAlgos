@@ -65,6 +65,7 @@ class Solution
 
         Stacks.EvalReversePolishNotation(new List<string>() { "2", "2", "/" });
         Stacks.BalancedParenthesis("{([])}");
+        Stacks.DoubleCharacterTrouble("aaaaa");
     }
 
 }

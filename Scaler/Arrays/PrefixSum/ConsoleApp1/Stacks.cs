@@ -61,6 +61,35 @@ namespace ArraysDSA
 
         }
 
+        //https://www.scaler.com/academy/mentee-dashboard/class/236118/assignment/problems/968?navref=cl_tt_lst_nm
+        public static string DoubleCharacterTrouble(string A)
+        {
+            Stack<char> stack = new Stack<char>();
+            if (A.Length == 0) return string.Empty;
+
+            stack.Push(A[0]);
+            for(int i=1;i < A.Length; i++)
+            {
+                if (stack.Count >0 && stack.Peek() == A[i])
+                {
+                    stack.Pop();
+                }
+                else
+                {
+                    stack.Push(A[i]);
+                }
+            }
+
+            var result = new char[stack.Count];
+            for (int i = stack.Count-1; i >= 0; i--)
+            {
+                result[i] = stack.Pop();
+            }
+
+            return string.Concat(result);
+        }
+
+
         private static int EvaluateTheExpression(int op1, int op2, string op)
         {
             if (op == "+")
