@@ -89,6 +89,37 @@ namespace ArraysDSA
             return string.Concat(result);
         }
 
+        //https://www.scaler.com/academy/mentee-dashboard/class/236120/assignment/problems/332
+        public static List<int> NearestSmallestELement(List<int> A)
+        {
+            var res = new int[A.Count];
+            Stack<int> stack = new Stack<int>();
+
+            res[0] = -1;
+            stack.Push(A[0]);
+
+            for(int i = 1; i < A.Count; i++)
+            {
+                while(stack.Count > 0 && stack.Peek() >= A[i])
+                {
+                    stack.Pop();
+                }
+
+                if(stack.Count == 0)
+                {
+                    res[i] = -1;
+                }
+                else
+                {
+                    res[i] = stack.Peek();
+                }
+
+                stack.Push(A[i]);
+            }
+
+            return res.ToList();
+        }
+
 
         private static int EvaluateTheExpression(int op1, int op2, string op)
         {

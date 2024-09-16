@@ -66,6 +66,8 @@ class Solution
         Stacks.EvalReversePolishNotation(new List<string>() { "2", "2", "/" });
         Stacks.BalancedParenthesis("{([])}");
         Stacks.DoubleCharacterTrouble("aaaaa");
+
+        Stacks.NearestSmallestELement(new List<int> { 34, 35, 27, 42, 5, 28, 39, 20, 28 });
     }
 
 }
