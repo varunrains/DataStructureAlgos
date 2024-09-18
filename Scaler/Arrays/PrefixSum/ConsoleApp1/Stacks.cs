@@ -120,6 +120,72 @@ namespace ArraysDSA
             return res.ToList();
         }
 
+        //https://www.scaler.com/academy/mentee-dashboard/class/236120/assignment/problems/49
+        public static int LargestRectangleArea(List<int> A)
+        {
+            if (A.Count == 1)
+            {
+                return A[0];
+            }
+
+            var nsl = new int[A.Count];
+            var nsr = new int[A.Count];
+            Stack<int> stack = new Stack<int> ();
+            Stack<int> stack1 = new Stack<int>();
+
+            nsl[0] = -1;
+            nsr[A.Count - 1] = A.Count;
+
+            stack.Push(0);
+            stack1.Push(A.Count - 1);
+
+            for (int i = 1;i< A.Count; i++)
+            {
+                while(stack.Count>0 && A[stack.Peek()] >= A[i])
+                {
+                    stack.Pop();
+                }
+                if(stack.Count == 0)
+                {
+                    nsl[i] = -1;
+                }
+                else
+                {
+                    nsl[i] = stack.Peek();
+                }
+
+                stack.Push(i);
+            }
+
+            for(int i = A.Count - 2; i >= 0; i--)
+            {
+                while (stack1.Count > 0 && A[stack1.Peek()] >= A[i])
+                {
+                    stack1.Pop();
+                }
+                if(stack1.Count == 0)
+                {
+                    nsr[i] = A.Count;
+                }
+                else
+                {
+                    nsr[i] = stack1.Peek(); 
+                }
+
+                stack1.Push(i);
+            }
+
+            int ans = 0;
+
+            for(int i=0;i< A.Count; i++)
+            {
+                ans = Math.Max(ans, A[i] * (nsr[i] - nsl[i] - 1));
+            }
+
+            return ans;
+
+        }
+
 
         private static int EvaluateTheExpression(int op1, int op2, string op)
         {
