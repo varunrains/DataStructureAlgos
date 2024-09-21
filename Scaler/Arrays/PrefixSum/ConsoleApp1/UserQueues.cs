@@ -79,31 +79,59 @@ namespace ArraysDSA
 
 
     //https://www.scaler.com/academy/mentee-dashboard/class/236124/assignment/problems/50?navref=cl_tt_lst_nm
-
+    //This needs review copied from chatgpt
     public static class QueueProblems
     {
         public static List<int> SlidingMaximum(List<int> A, int B)
         {
-           Deque<int> s = new Deque<int>();
-            var res = new List<int>();
-            var maximum = int.MinValue;
-            var maxIndex = 0;
-            for(int i = 0; i < B; i++)
+            int n = A.Count;
+            if (B > n)
             {
-               // maximum = Math.Max(maximum, A[i]);
-                if(maximum < A[i])
+                // If B is greater than the length of the array, return the maximum of the whole array
+                int max = A[0];
+                for (int i = 1; i < n; i++)
                 {
-                    maximum = A[i];
-                    maxIndex = i;
+                    if (A[i] > max)
+                    {
+                        max = A[i];
+                    }
+                }
+                return new List<int>() { max};
+            }
+
+            // Result array to store the maximums for each window
+            int[] result = new int[n - B + 1];
+            // Deque to store indices of elements in the current window
+            Deque<int> deque = new Deque<int>();
+
+            for (int i = 0; i < n; i++)
+            {
+                // Remove elements that are out of this window
+                if (!deque.IsEmpty && deque.PeekLeft() < i - B + 1)
+                {
+                    deque.PopLeft();
+                }
+
+                // Remove elements from the deque that are smaller than the current element
+                // since they will not be the maximum in the current window
+                while (!deque.IsEmpty && A[deque.PeekRight()] <= A[i])
+                {
+                    deque.PopRight();
+                }
+
+                // Add current element's index to the deque
+                deque.PushRight(i);
+
+                // Start adding to the result array once we've processed the first window
+                if (i >= B - 1)
+                {
+                    result[i - B + 1] = A[deque.PeekRight()];
                 }
             }
-            res.Add(A[maxIndex]);
-            
-            s.PushRight(maxIndex);
 
-            return null;
-             
-                              
+            return result.ToList();
+
+
         }
     }
 
