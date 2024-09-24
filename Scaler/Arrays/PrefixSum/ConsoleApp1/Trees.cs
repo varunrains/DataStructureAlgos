@@ -26,7 +26,7 @@ namespace ArraysDSA
             return list;
         }
 
-        public List<int> RecursionTraversal(TreeNode A, List<int> list)
+        private List<int> RecursionTraversal(TreeNode A, List<int> list)
         {
             if (A == null) { return list; }
             RecursionTraversal(A.left, list);
@@ -35,6 +35,24 @@ namespace ArraysDSA
 
             return list;
         }
+
+        public List<int> PreOrderTraversal(TreeNode A)
+        {
+            var list = new List<int>();
+            PreOrderRecursionTraversal(A, list);
+            return list;
+        }
+
+        public List<int> PreOrderRecursionTraversal(TreeNode A, List<int> list)
+        {
+            if (A == null) { return list; }
+            list.Add(A.val);
+            PreOrderRecursionTraversal(A.left, list);
+            PreOrderRecursionTraversal(A.right, list);
+
+            return list;
+        }
+
 
         //https://www.scaler.com/academy/mentee-dashboard/class/236128/assignment/problems/234?navref=cl_tt_lst_nm
         public static int HasPathSum(TreeNode A, int B)
