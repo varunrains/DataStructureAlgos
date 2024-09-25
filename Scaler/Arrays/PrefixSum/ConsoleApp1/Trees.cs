@@ -54,6 +54,96 @@ namespace ArraysDSA
         }
 
 
+        //https://www.scaler.com/academy/mentee-dashboard/class/236126/assignment/problems/206?navref=cl_tt_lst_nm
+        public static List<List<int>> LevelOrderOfATree(TreeNode A)
+        {
+            var res = new List<List<int>>();
+
+            var queue = new Queue<TreeNode>();
+            queue.Enqueue(A);
+
+            while(queue.Count > 0)
+            {
+                var list = new List<int>();
+                int size = queue.Count;
+                for (int i = 0; i < size; i++)
+                {
+                    var curr = queue.Dequeue();
+                    list.Add(curr.val);
+
+                    if(curr.left != null)
+                    queue.Enqueue(curr.left);
+
+                    if(curr.right != null)
+                     queue.Enqueue(curr.right);
+
+                }
+                res.Add(list);
+            }
+
+            return res;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/236126/assignment/problems/5714?navref=cl_tt_lst_nm
+        public static List<int> RightViewOfTheTree(TreeNode A)
+        {
+            var res = new List<int>();
+            
+            var queue = new Queue<TreeNode>();
+            queue.Enqueue(A);
+
+            while(queue.Count > 0)
+            {
+                int size = queue.Count;
+
+                for(int i=0; i < size; i++)
+                {
+                    var curr = queue.Dequeue();
+
+                    if(i == size - 1)
+                    {
+                        res.Add(curr.val);
+                    }
+
+                    if(curr.left != null)
+                        queue.Enqueue(curr.left);
+
+                    if (curr.right != null)
+                        queue.Enqueue(curr.right);
+                }
+            }
+
+            return res;
+
+        }
+
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/236126/assignment/problems/225?navref=cl_tt_lst_nm
+        public static int BalancedBinaryTree(TreeNode A)
+        {
+            return HeightOfATreeRec(A) > 0 ? 1 : 0;
+        }
+
+        public static int HeightOfATreeRec(TreeNode A)
+        {
+            if (A == null) return -1;
+
+
+
+            int leftSubTree = HeightOfATreeRec(A.left);
+            int rightSubTree = HeightOfATreeRec(A.right);
+
+            if(Math.Abs(leftSubTree - rightSubTree) > 1)
+            {
+                return 0;
+            }
+
+            return Math.Max(leftSubTree, rightSubTree) + 1;
+
+        }
+
+
+
         //https://www.scaler.com/academy/mentee-dashboard/class/236128/assignment/problems/234?navref=cl_tt_lst_nm
         public static int HasPathSum(TreeNode A, int B)
         {
