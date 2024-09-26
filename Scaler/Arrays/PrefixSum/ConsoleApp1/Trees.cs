@@ -117,30 +117,44 @@ namespace ArraysDSA
 
         }
 
+        //https://www.scaler.com/academy/mentee-dashboard/class/236126/assignment/problems/224?navref=cl_tt_lst_nm
+        public static TreeNode BuildATreeFromInorderAndPostOrder(List<int> A, List<int> B)
+        {
+            var rootNode = new TreeNode(B[B.Count - 1]);
+        }
+
+
+
 
         //https://www.scaler.com/academy/mentee-dashboard/class/236126/assignment/problems/225?navref=cl_tt_lst_nm
         public static int BalancedBinaryTree(TreeNode A)
         {
-            return HeightOfATreeRec(A) > 0 ? 1 : 0;
+            bool ans = true;
+            HeightOfATreeRec(A, ref ans);
+            if (!ans)
+                return 0;
+            else
+                return 1;
         }
 
-        public static int HeightOfATreeRec(TreeNode A)
+        private static int HeightOfATreeRec(TreeNode A, ref bool ans)
         {
+            
             if (A == null) return -1;
 
-
-
-            int leftSubTree = HeightOfATreeRec(A.left);
-            int rightSubTree = HeightOfATreeRec(A.right);
+            int leftSubTree = HeightOfATreeRec(A.left, ref ans);
+            int rightSubTree = HeightOfATreeRec(A.right, ref ans);
 
             if(Math.Abs(leftSubTree - rightSubTree) > 1)
             {
-                return 0;
+                ans = false;
             }
 
             return Math.Max(leftSubTree, rightSubTree) + 1;
 
         }
+
+      
 
 
 
