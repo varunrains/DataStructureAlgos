@@ -120,7 +120,27 @@ namespace ArraysDSA
         //https://www.scaler.com/academy/mentee-dashboard/class/236126/assignment/problems/224?navref=cl_tt_lst_nm
         public static TreeNode BuildATreeFromInorderAndPostOrder(List<int> A, List<int> B)
         {
-            var rootNode = new TreeNode(B[B.Count - 1]);
+            var hashMap = new Dictionary<int, int>();
+            for(int i = 0; i < A.Count; i++)
+            {
+                hashMap[A[i]] = i;
+            }
+
+            return ConstructTree(A, B, 0, A.Count-1,0,B.Count-1,hashMap);
+        }
+
+        public static TreeNode ConstructTree(List<int> inOrder, List<int> postOrder, int isi, int iei, int psi, int pei, Dictionary<int,int> map)
+        {
+
+            if(isi == iei) { return new TreeNode(inOrder[isi]); }
+
+            var root = new TreeNode(postOrder[pei]);
+            var idx = map[postOrder[pei]];
+
+            root.left = ConstructTree(inOrder, postOrder, isi, idx - 1, psi, psi + idx -isi - 1, map);
+            root.right = ConstructTree(inOrder, postOrder, idx + 1, iei, psi + idx - isi, pei - 1, map);
+
+            return root;
         }
 
 
