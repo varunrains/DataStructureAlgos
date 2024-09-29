@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Pipes;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -201,6 +203,81 @@ namespace ArraysDSA
             bool rightPathSum = A.right != null && HasPathSumRec(A.right, remainingSum);
 
             return leftPathSum || rightPathSum;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/236130/assignment/problems/35476?navref=cl_tt_lst_nm
+        public static int SearchinValidBST(TreeNode A, int B)
+        {
+            int ans = 0;
+            SearchinValidBSTRec(A, B, ref ans);
+            return ans;
+        }
+
+        public static void SearchinValidBSTRec(TreeNode A, int B, ref int ans)
+        {
+            if(A == null) { return; }
+           
+            if (A.val == B)
+            {
+                ans = 1;
+            }
+
+            if (B < A.val)
+            {
+                SearchinValidBSTRec(A.left, B, ref ans);
+            }
+            else
+            {
+                SearchinValidBSTRec(A.right, B, ref ans);
+            }
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/236130/assignment/problems/221?navref=cl_tt_lst_nm
+        public static int IsValidBST(TreeNode A)
+        {
+            int ans = 1;
+            int prev = int.MinValue;
+            IsValidBSTRec(A, ref prev, ref ans);
+
+            return ans;
+        }
+
+
+        public static void IsValidBSTRec(TreeNode A, ref int prev, ref int ans)
+        {
+            if(A == null) { return; }
+            
+            IsValidBSTRec(A.left, ref prev, ref ans);
+            if(prev > A.val) 
+            {
+                ans = 0;
+            }
+            prev = A.val;
+            IsValidBSTRec(A.right, ref prev, ref ans);
+        }
+
+
+
+        public TreeNode SortedArrayToBST(List<int> A)
+        {
+            int low = 0;
+            int high = A.Count - 1;
+            var root = SortedArrayToBSTRec(A, low,high);
+            return root;
+        }
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/236130/assignment/problems/226?navref=cl_tt_lst_nm
+        private static TreeNode SortedArrayToBSTRec(List<int> A,int low, int high)
+        {
+            if (low > high) { return null;  }
+            var mid = (low+high)/2;
+            var root = new TreeNode(A[mid]);
+
+
+            root.left = SortedArrayToBSTRec(A,low, mid-1);
+            root.right = SortedArrayToBSTRec(A, mid+1, high);
+
+            return root;
         }
 
 
