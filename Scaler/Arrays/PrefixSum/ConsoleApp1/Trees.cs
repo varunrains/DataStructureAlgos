@@ -232,6 +232,56 @@ namespace ArraysDSA
             }
         }
 
+
+        //https://www.scaler.com/academy/mentee-dashboard/class/236130/assignment/problems/18384
+        public static TreeNode DeleteANodeInBST(TreeNode A, int B)
+        {
+            if(A == null) { return null; }
+
+            if (A.val == B)
+            {
+
+                if (A.left == null && A.right == null)
+                {
+                    return null;
+                }
+                else if (A.left == null && A.right != null)
+                {
+                    return A.right;
+                }
+                else if (A.left != null && A.right == null)
+                {
+                    return A.left;
+                }
+                else //Here we need to be careful when there are children associated to the node
+                {
+                    //Find the maximum in the left subtree and then replace it with the root val
+                    TreeNode temp = A.left;
+                    while(temp.right != null)
+                    {
+                        temp = temp.right;
+                    }
+                    var rep = A.val;
+                    A.val = temp.val;
+                    temp.val = rep;
+
+                    A.left = DeleteANodeInBST(A.left, B);
+                    return A;
+                }
+
+            }
+            else if (B < A.val)
+            {
+               A.left =  DeleteANodeInBST(A.left, B);
+            }
+            else
+            {
+              A.right =  DeleteANodeInBST(A.right, B);
+            }
+
+            return A;
+        }
+
         //https://www.scaler.com/academy/mentee-dashboard/class/236130/assignment/problems/221?navref=cl_tt_lst_nm
         public static int IsValidBST(TreeNode A)
         {
