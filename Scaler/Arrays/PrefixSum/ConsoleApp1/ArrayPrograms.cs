@@ -179,5 +179,26 @@ namespace ConsoleApp1
 
             return use;
         }
+
+        public static List<List<int>> CalculatePermutation(int[] list)
+        {
+            List<List<int>> result = new List<List<int>>();
+
+            for(int i=0;i<list.Length; i++)
+            {
+                for(int j = 0; j < list.Length && i!=j; j++)
+                {
+                    var temp = list[i];
+                    list[i] = list[j];
+                    list[j] = temp;
+                     
+                    result.Add(list.ToList());
+                }
+
+              
+            }
+
+            return result;
+        }
     }
 }
