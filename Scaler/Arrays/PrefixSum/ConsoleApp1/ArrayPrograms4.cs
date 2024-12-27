@@ -63,5 +63,38 @@ namespace ArraysDSA
             return res.ToList();
         }
 
+        //https://www.scaler.com/academy/mentee-dashboard/class/346254/assignment/problems/47?navref=cl_tt_lst_nm
+        public static int RainWaterTrap(List<int> A)
+        {
+            int result = 0;
+            int[] prefix = new int[A.Count];
+            int[] suffix = new int[A.Count];
+
+            //Initialization
+            prefix[0] = A[0];
+            suffix[A.Count-1] = A[A.Count-1];
+
+            //find the max from left
+            for (int i = 1; i < A.Count; i++)
+            {
+                prefix[i] = Math.Max(prefix[i-1], A[i]);
+            }
+
+            //find the max from right
+            for (int i = A.Count-2; i >= 0; i--)
+            {
+                suffix[i] = Math.Max(suffix[i + 1], A[i]);
+            }
+
+
+            //calculate the trapped water
+            for(int i=0; i< A.Count; i++)
+            {
+                result += Math.Min(prefix[i], suffix[i]) - A[i];
+            }
+
+            return result;
+        }
+
     }
 }
