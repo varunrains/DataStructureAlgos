@@ -79,6 +79,8 @@ class Solution
             new List<int>() { 2,5,25 }
         }
             );
+
+        TwoDArray.GenerateSpiralMatrix(5);
     }
 
 }
