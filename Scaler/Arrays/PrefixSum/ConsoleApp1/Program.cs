@@ -81,6 +81,9 @@ class Solution
             );
 
         TwoDArray.GenerateSpiralMatrix(5);
+
+        ArrayPrograms4.FirstMissingInteger(new List<int>() { 1 });
+        ArrayPrograms4.MergeOverlappingInterval(new List<List<int>>() { new List<int>() { 4,4 }, new List<int>() {5,27}, new List<int>() { 5,31 },new List<int>() { 6,20 }, new List<int>() { 6,25 }, new List<int>() { 8,48 } });
     }
 
 }
